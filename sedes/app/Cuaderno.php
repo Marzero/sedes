@@ -1,0 +1,33 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cuaderno extends Model
+{
+    protected $table="cuadernos";
+
+    protected $fillable=[
+       'user_id',
+       'paciente_id',
+       'ci',
+       'nombre',
+       'fecha',
+       'dato',
+       'edad',
+       'diagnostico',
+       'receta',
+       'nro_ficha'
+    ];
+
+    public function user()
+    {
+        return $this->BelongsTo(User::class);
+    }
+
+    public function paciente()
+    {
+        return $this->BelongsTo(Paciente::class);
+    }
+}
