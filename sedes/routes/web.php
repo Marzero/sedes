@@ -47,5 +47,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('inicio_cuadernos','CuadernoController@inicio_cuadernos')->name('inicio_cuadernos');
     route::get('cuaderno_buscar/{valor}', 'CuadernoController@cuaderno_buscar')->name('cuaderno_buscar');
     Route::post('nueva_atencion','CuadernoController@nueva_atencion')->name('nueva_atencion');
-    
+    Route::get('ver_cuaderno/{id}','CuadernoController@ver_cuaderno')->name('ver_cuaderno');
+
+
+    Route::get('show_receta/{id}','RecetaController@show_receta')->name('show_receta');
+    Route::post('store_receta','RecetaController@store_receta')->name('store_receta');
+    Route::get('crear_receta_cuaderno/{id}','RecetaController@crear_receta_cuaderno')->name('crear_receta_cuaderno');
+    Route::post('agregar_indicacion','RecetaController@agregar_indicacion')->name('agregar_indicacion');
 });

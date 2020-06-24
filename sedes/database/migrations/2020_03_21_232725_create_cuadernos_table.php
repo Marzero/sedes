@@ -19,6 +19,7 @@ class CreateCuadernosTable extends Migration
             $table->string('paciente_id')->nullable();
             $table->string('ci')->nullable();
             $table->string('nombre')->nullable();
+            $table->string('estado_civil')->nullable();
             $table->string('fecha')->nullable();
             $table->string('dato')->nullable();
             $table->string('edad')->nullable();

@@ -13,6 +13,7 @@ class Cuaderno extends Model
        'paciente_id',
        'ci',
        'nombre',
+       'estado_civil',
        'fecha',
        'dato',
        'edad',

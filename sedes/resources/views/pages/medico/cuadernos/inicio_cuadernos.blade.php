@@ -10,6 +10,9 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/i18n/ar.min.js"></script>
+<link rel="stylesheet" href="{{ URL::to('editor/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
+
 @endsection
 
 @section('content')
@@ -31,6 +34,18 @@
             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
                 Nueva atención
             </button>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
@@ -123,6 +138,24 @@
             </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -134,7 +167,7 @@
                         </div>
                         <form action="{{ route('nueva_atencion') }}" method="post" autocomplete="off">
                             @csrf
-                            <p></p>
+                            <input type="hidden" name="id_paciente" value="" id="id_paciente">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -142,21 +175,34 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label>CI del paciente</label>
                                         <input type="text" name="ci_paciente" id="ci_paciente" class="form-control" style="background-color: #fdcc44" required>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label>Paciente (Apellidos y nombres)</label>
                                         <input type="text" name="nombre_paciente" id="nombre_paciente" class="form-control" required>
                                     </div>
+                                    <div class="col-md-4">
+                                        <label>Estado_civil</label>
+                                        <select name="estadop_civil_paciente" id="estadop_civil_paciente" class="form-control" required>
+                                            <option value="">--Seleccione una opcion--</option>
+                                            <option value="Soltero/a">Soltero/a</option>
+                                            <option value="Casado/a">Casado/a</option>
+                                            <option value="Divorciado/a">Divorciado/a</option>
+                                            <option value="Viudo/a">Viudo/a</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label>Dato </label><input type="checkbox" name="dato" id="cbox1" value="si" class="form-control"> 
+                                    </div>
+                                    <div class="col-md-4">
                                         <label>Nro de ficha</label>
                                         <input type="text" name="nro_ficha" id="nro_ficha" value="" class="form-control" required>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label>Edad</label>
                                         <input type="text" name="edad" id="edad" class="form-control" required>
                                     </div>
@@ -165,13 +211,11 @@
                                     
                                     <div class="col-md-6">
                                         <label>Diagnóstico</label>
-                                        <textarea name="diagnostico" id="diagnostico" cols="30" rows="10" class="form-control" required></textarea>
+                                        <textarea name="diagnostico" id="diagnostico" cols="30" rows="6" class="form-control" required></textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Receta:</label>
-                                        <textarea name="receta" id="receta" cols="30" rows="10" class="form-control" required>
-                                            
-                                        </textarea>
+                                        <textarea name="receta" id="receta" cols="30" rows="6" class="form-control" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +233,14 @@
 
 
 
+
+
+
+
+
+
+
+
             
             <p class="text-muted m-b-15"></p>
             {{-- <table id="example" class="table table-bordered table-striped table-condensed" style="width:100%"> --}}
@@ -197,7 +249,10 @@
                     <tr>
                         <th>Nro.</th>
                         <th>Nombre</th>
-                        <th>Ci</th>
+                        <th>Estado civil</th>
+                        <th>Dato</th>
+                        <th>Edad</th>
+                        <th>Diagnostico</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -205,10 +260,13 @@
                     @foreach($cuadernos as $c)
                         <tr>
                             <td>{{$c->id}}</td>
-                            <td>{{$c->paciente->perfil->apellido_paterno}} {{$c->paciente->perfil->apellido_materno}} {{$c->paciente->perfil->nombres}}</td>
-                            <td>{{ $c->paciente->perfil->ci }}</td>
+                            <td>{{ $c->nombre }}</td>
+                            <td>{{ $c->estado_civil }}</td>
+                            <td>{{ $c->dato }}</td>
+                            <td>{{ $c->edad }}</td>
+                            <td>{{ $c->diagnostico }}</td>
                             <td>
-
+                                <a href="{{ route('ver_cuaderno',$c->id) }}">Ver detalles</a>
                             </td>
                         </tr>
                     @endforeach
@@ -217,7 +275,10 @@
                     <tr>
                         <th>Nro.</th>
                         <th>Nombre</th>
-                        <th>Ci</th>
+                        <th>Estado civil</th>
+                        <th>Dato</th>
+                        <th>Edad</th>
+                        <th>Diagnostico</th>
                         <th>Opciones</th>
                     </tr>
                 </tfoot>
@@ -225,6 +286,19 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @endsection
@@ -239,7 +313,6 @@
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ URL::to('admin/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
 {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.20/datatables.min.js"></script>--}}
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
     jQuery(function($){
         $('#ci_paciente').on('change',function(e){
@@ -254,6 +327,7 @@
               success: function(respuesta) {
                 //console.log(respuesta.latitud,respuesta.longitud);
                 $('#nombre_paciente').val(respuesta.apellido_paterno+" "+respuesta.apellido_materno+" "+respuesta.nombres);
+                $('#id_paciente').val(respuesta.id);
               },
               error: function() {
                     console.log("No se ha podido obtener la información");
@@ -264,4 +338,17 @@
 
     });
 </script>
+
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{{ URL::to('editor/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script>
+  /*jQuery(function ($) {
+
+
+    $('#diagnostico').wysihtml5({
+      toolbar: { fa: true }
+    })
+  })*/
+</script>
+</body>
 @endsection
