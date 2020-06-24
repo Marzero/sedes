@@ -19,6 +19,7 @@ class CuadernoController extends Controller
     public function cuaderno_buscar(Request $request)
     {
         $p=Perfil::where('ci',$request->valor)->first();
+        //dd($p);
         echo json_encode($p);
     }
 

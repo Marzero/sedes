@@ -67,6 +67,11 @@
                                 @endforeach
                             </tbody>
                         </thead>
+                        
+                    </table>
+                    <hr>
+                    <h3>Agregar indicaciones y medicamentos</h3>
+                    <table class="table">
                         <tbody>
                             <form action="{{ route('agregar_indicacion') }}" method="post">
                                 @csrf

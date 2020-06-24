@@ -48,4 +48,10 @@ class User extends Authenticatable
     {
         return $this->HasMany(Cuaderno::class);
     }
+
+    public function mordeduras()
+    {
+        return $this->HasMany(Mordedura::class);
+    }
 }
+

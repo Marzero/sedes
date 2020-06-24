@@ -54,4 +54,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('store_receta','RecetaController@store_receta')->name('store_receta');
     Route::get('crear_receta_cuaderno/{id}','RecetaController@crear_receta_cuaderno')->name('crear_receta_cuaderno');
     Route::post('agregar_indicacion','RecetaController@agregar_indicacion')->name('agregar_indicacion');
+
+    Route::get('indice_mordeduras','MordeduraController@indice_mordeduras')->name('indice_mordeduras');
 });

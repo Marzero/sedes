@@ -19,11 +19,11 @@ class CreatePerfilesTable extends Migration
             $table->string('nombres');
             $table->string('apellido_paterno');
             $table->string('apellido_materno')->nullable();
-            $table->string('fecha_nacimiento');
-            $table->string('ocupacion');
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->string('sexo');
+            $table->string('fecha_nacimiento')->nullable();
+            $table->string('ocupacion')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('sexo')->nullable();
             $table->string('estado_civil')->nullable();
             $table->timestamps();
         });
