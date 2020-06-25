@@ -53,5 +53,13 @@ class User extends Authenticatable
     {
         return $this->HasMany(Mordedura::class);
     }
+    public function certificados()
+    {
+        return $this->HasMany(Certificado::class);
+    }
+    public function copros()
+    {
+        return $this->HasMany(Copro::class);
+    }
 }
 

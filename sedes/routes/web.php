@@ -56,4 +56,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('agregar_indicacion','RecetaController@agregar_indicacion')->name('agregar_indicacion');
 
     Route::get('indice_mordeduras','MordeduraController@indice_mordeduras')->name('indice_mordeduras');
+    Route::post('store_mordedura','MordeduraController@store_mordedura')->name('store_mordedura');
+    Route::get('show_mordedura/{id}','MordeduraController@show_mordedura')->name('show_mordedura');
+    Route::post('store_dosis','MordeduraController@store_dosis')->name('store_dosis');
+
+    Route::get('indice_certificados','CertificadoController@indice_certificados')->name('indice_certificados');
+    Route::post('store_certificado','CertificadoController@store_certificado')->name('store_certificado');
+    Route::get('show_certificado/{id}','CertificadoController@show_certificado')->name('show_certificado');
 });

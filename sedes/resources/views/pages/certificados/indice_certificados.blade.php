@@ -24,7 +24,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h1>Registros de Mordeduras</h1>
+            <h1>Registros de Certificados Médicos</h1>
         </div>
         <div class="card-body">
             <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#largeModal">
@@ -32,7 +32,7 @@
             </button>
 
             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
-                Nuevo registro de mordedura
+                Nuevo registro de certificado
             </button>
 
 
@@ -160,124 +160,47 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="mediumModalLabel">Registrar nueva mordedura</h5>
+                            <h5 class="modal-title" id="mediumModalLabel">Registrar nuevo certificado</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('store_mordedura') }}" method="post" autocomplete="off">
+                        <form action="{{ route('store_certificado') }}" method="post" autocomplete="off">
                             @csrf
                             <input type="hidden" name="id_paciente" value="" id="id_paciente">
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="">Municipio</label>
-                                        <input type="text" name="municipio" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="">Establecimiento</label>
-                                        <input type="text" name="establecimiento" class="form-control" requiered>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>CI del paciente</label>
-                                        <input type="text" name="ci_paciente" id="ci_paciente" class="form-control" style="background-color: #fdcc44">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Paciente (Apellidos y nombres)</label>
-                                        <input type="text" name="nombre_paciente" id="nombre_paciente" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Sexo</label>
-                                        <select name="sexo_paciente" id="sexo" class="form-control" required>
+                                    <div class="col-md-9">
+                                        <label>Pacientes</label>
+                                        <select name="paciente_id" id="" class="form-control" required>
                                             <option value="">--Seleccione una opcion--</option>
-                                            <option value="Masculino">Masculino</option>
-                                            <option value="Femenino">Femenino</option>
+                                            @foreach($pacientes as $p)
+                                                <option value="{{ $p->id }}">
+                                                    {{ $p->perfil->apellido_paterno }} {{ $p->perfil->apellido_materno }} {{ $p->perfil->nombres }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-2">
-                                        <label>Edad</label>
-                                        <input type="number" name="edad_paciente" id="edad_paciente" class="form-control" required>
+                                    <div class="col-md-3">
+                                        <label>Matricula profesional</label>
+                                        <input type="text" name="matricula" id="matricula" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Lugar</label>
+                                        <input type="text" name="lugar" id="lugar" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Fecha</label>
+                                        <input type="date" name="fecha" id="fecha" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Dirección</label>
-                                        <input type="text" name="direc_paciente" id="direc_paciente" value="" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Fecha de mordedura</label>
-                                        <input type="date" name="fecha_mordedura" id="fecha_mordedura" value="" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Donde fue mordido</label>
-                                        <input type="text" name="donde" id="donde" class="form-control" required>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Localización de la mordedura</label>
-                                        <input type="text" name="localizacion_mordedura" id="localizacion_mordedura" value="" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Herida</label>
-                                        <select name="herida" id="herida" class="form-control" required>
-                                            <option value="">--seleccione una opción--</option>
-                                            <option value="Única">Única</option>
-                                            <option value="Múltiple">Múltiple</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Tipo Herida</label>
-                                        <select name="tipo_herida" id="tipo_herida" class="form-control" required>
-                                            <option value="">--seleccione una opción--</option>
-                                            <option value="Superficial">Superficial</option>
-                                            <option value="Profunda">Profunda</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <hr>
-                                <h5>Datos del animal</h5>
-                                <div class="row">
-                                    
-                                    <div class="col-md-4">
-                                        <label>Especie</label>
-                                        <select name="especie" id="especie" class="form-control" required>
-                                            <option value="">--seleccione una opción--</option>
-                                            <option value="Perro">Perro</option>
-                                            <option value="Gato">Gato</option>
-                                            <option value="Otras especies">Otras especies</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Vacunacion anterior:</label>
-                                        <select name="vacunacion_anterior" id="vacunacion_anterior" class="form-control" required>
-                                            <option value="">--seleccione una opción--</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                            <option value="Desconocido">Desconocido</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Fecha de vacunacion anterior():</label>
-                                        <input type="date" name="fecha_vacunacion_anterior" class="form-control">
-                                    </div>
-                                </div>
-                                <hr>
-                                <h5>Datos del tratamiento del paciente</h5>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label for="">Tiene la vacuna antirrabica?</label>
-                                        <select name="vacuna_antirrabica" id="vacuna_antirrabica" class="form-control" required>
-                                            <option value="">--seleccione una opción--</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                            <option value="Desconocido">Desconocido</option>
-                                        </select>
+                                        <label for="">Detalle:</label>
+                                        <textarea name="detalle" id="detalle" cols="50" rows="10" class="form-control"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -310,25 +233,29 @@
                 <thead>
                     <tr>
                         <th>Nro.</th>
-                        <th>Nombre</th>
-                        <th>Estado civil</th>
-                        <th>Dato</th>
-                        <th>Edad</th>
-                        <th>Diagnostico</th>
+                        <th>Paciente</th>
+                        <th>fecha</th>
+                        <th>Lugar</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($mordeduras as $m)
+                    @foreach($certificados as $c)
+                    @php
+                    //dd($c);
+                        //$paciente=App\Paciente::where('id',$c->paciente_id)->first();
+                    @endphp
                         <tr>
-                            <td>{{ $m->id }}</td>
-                            <td>{{ $m->nombre }}</td>
-                            <td>{{ $m->estado_civil }}</td>
-                            <td>{{ $m->dato }}</td>
-                            <td>{{ $m->edad }}</td>
-                            <td>{{ $m->diagnostico }}</td>
+                            <td>{{ $c->id }}</td>
                             <td>
-                                <a href="{{ route('show_mordedura',$m->id) }}">Ver detalles</a>
+                                {{ $c->paciente->perfil->apellido_paterno }} 
+                                {{ $c->paciente->perfil->apellido_materno }} 
+                                {{ $c->paciente->perfil->nombres }}
+                            </td>
+                            <td>{{ $c->fecha }}</td>
+                            <td>{{ $c->lugar }}</td>
+                            <td>
+                                <a href="{{ route('show_certificado',$c->id) }}">Ver detalles</a>
                             </td>
                         </tr>
                     @endforeach
@@ -336,11 +263,9 @@
                 <tfoot>
                     <tr>
                         <th>Nro.</th>
-                        <th>Nombre</th>
-                        <th>Estado civil</th>
-                        <th>Dato</th>
-                        <th>Edad</th>
-                        <th>Diagnostico</th>
+                        <th>Paciente</th>
+                        <th>fecha</th>
+                        <th>Lugar</th>
                         <th>Opciones</th>
                     </tr>
                 </tfoot>
