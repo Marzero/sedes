@@ -13,22 +13,29 @@ class MordeduraController extends Controller
 {
     public function indice_mordeduras()
     {
+        $pacientes=Paciente::all();
         $mordeduras=Mordedura::all();
-        return view('pages.mordeduras.indice_mordeduras',compact('mordeduras'));
+        return view('pages.mordeduras.indice_mordeduras',compact('mordeduras','pacientes'));
     }
 
     public function store_mordedura(Request $request)
     {
         //dd($request);
+        $paciente=Paciente::find($request->paciente_id);
+        $perfil=Perfil::find($paciente->perfil_id);
         $m=new Mordedura($request->all());
+        
         $m->user_id=auth()->user()->id;
-        $m->paciente_id=$request->id_paciente;
+
+        $m->paciente_id=$request->paciente_id;
         $m->municipio=$request->municipio;
         $m->establecimiento=$request->establecimiento;
-        $m->nombre=$request->nombre_paciente;
-        $m->sexo=$request->sexo_paciente;
+
+        $m->nombre=$perfil->apellido_paterno.' '.$perfil->apellido_materno.' '.$perfil->nombres;
+        $m->sexo=$perfil->sexo;
+        $m->direccion=$perfil->direccion;
+
         $m->edad=$request->edad_paciente;
-        $m->direccion=$request->direc_paciente;
         $m->fecha_mordedura=$request->fecha_mordedura;
         $m->donde=$request->donde;
         $m->localizacion=$request->localizacion_mordedura;
@@ -38,6 +45,7 @@ class MordeduraController extends Controller
         $m->vacunacion_anterior=$request->vacunacion_anterior;
         $m->fecha_vacunacion_anterior=$request->fecha_vacunacion_anterior;
         $m->vacuna_antirrabica=$request->vacuna_antirrabica;
+        //dd($m);
         /*$m->v1=;
         $m->v2=;
         $m->v3=;

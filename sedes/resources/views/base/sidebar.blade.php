@@ -75,6 +75,17 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                        <i class="menu-icon fa fa-laptop"></i>Examenes
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_certificados') }}">Coproparasitológico</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="#">General de orina</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="#">Laboratorio clinico</a></li> 
+                        <li><i class="fa fa-puzzle-piece"></i><a href="#">Especiales</a></li> 
+                    </ul>
+                </li>
                 
 
                 <h3 class="menu-title">Extras</h3><!-- /.menu-title -->

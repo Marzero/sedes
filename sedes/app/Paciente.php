@@ -40,8 +40,8 @@ class Paciente extends Model
         return $this->HasMany(Certificado::class);
     }
 
-    public function copros()
+    public function ordenes()
     {
-        return $this->HasMany(Copro::class);
+        return $this->HasMany(Orden::class);
     }
 }

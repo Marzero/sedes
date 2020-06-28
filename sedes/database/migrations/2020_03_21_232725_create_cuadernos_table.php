@@ -17,15 +17,11 @@ class CreateCuadernosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('paciente_id')->nullable();
-            $table->string('ci')->nullable();
-            $table->string('nombre')->nullable();
-            $table->string('estado_civil')->nullable();
-            $table->string('fecha')->nullable();
-            $table->string('dato')->nullable();
             $table->string('edad')->nullable();
+            $table->string('fecha')->nullable();
             $table->string('diagnostico')->nullable();
-            $table->string('receta')->nullable();
             $table->string('nro_ficha')->nullable();
+            $table->string('dato')->nullable();
             $table->timestamps();
         });
     }

@@ -18,7 +18,8 @@ class Perfil extends Model
         'ocupacion',
         'direccion',
         'telefono',
-        'sexo'
+        'sexo',
+        'estado_civil',
     ];
 
     public function user()

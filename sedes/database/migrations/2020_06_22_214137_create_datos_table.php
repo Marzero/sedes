@@ -15,7 +15,7 @@ class CreateDatosTable extends Migration
     {
         Schema::create('datos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->UnsignedBigInteger('responsable_id')->nullable();
+            //$table->UnsignedBigInteger('responsable_id')->nullable();
             $table->UnsignedBigInteger('paciente_id')->nullable();
             $table->string('idioma_hablado')->nullable();
             $table->string('idioma_materno')->nullable();
@@ -24,7 +24,6 @@ class CreateDatosTable extends Migration
             $table->string('ocupacion_reproductiva')->nullable();
             $table->string('gestion_comunitaria')->nullable();
             $table->string('quien_decidio')->nullable();
-            $table->string('estado_civil')->nullable();
             $table->string('escolaridad')->nullable();
             $table->string('grupo_sanguineo')->nullable();
             $table->string('factor_rh')->nullable();

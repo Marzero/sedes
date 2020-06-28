@@ -25,22 +25,13 @@ class CuadernoController extends Controller
 
     public function nueva_atencion(Request $request)
     {
-            $c=new Cuaderno;
+            $c=new Cuaderno($request->all());
             $c->user_id=auth()->user()->id;
-            $c->paciente_id=$request->id_paciente;
-            $c->ci=$request->ci_paciente;
-            $c->nombre=$request->nombre_paciente;
-            $c->estado_civil=$request->estadop_civil_paciente;
             $c->fecha=date('Y-m-d');
-            $c->dato=$request->dato;
-            $c->edad=$request->edad;
-            $c->diagnostico=$request->diagnostico;
-            $c->receta=$request->receta;
-            $c->nro_ficha=$request->nro_ficha;
+            //dd($c);
             $c->save();
             flash('Atencion medica guardada correctamente','success');
-            
-            return redirect()->back();
+            return redirect()->route('ver_cuaderno',$c->id);
     }
 
     public function ver_cuaderno($id)

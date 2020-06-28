@@ -27,9 +27,7 @@
             <h1>Atenciones diarias (cuaderno médico)</h1>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#largeModal">
-                Registrar nuevo paciente
-            </button>
+            @include('pages.partes_repitentes.new_paciente_form')
 
             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
                 Nueva atención
@@ -48,94 +46,7 @@
 
 
 
-            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="largeModalLabel">Nuevo Paciente</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('store_paciente2') }}" method="post">
-                            @csrf
-                            <div class="modal-body">
-                                
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>CI</label>
-                                            <input type="text" name="ci" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Nombres</label>
-                                            <input type="text" name="nombres" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Apellido Paterno</label>
-                                            <input type="text" name="apellido_paterno" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Apellido Materno</label>
-                                            <input type="text" name="apellido_materno" class="form-control">
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Ocupación</label>
-                                            <input type="text" name="ocupacion" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input type="text" name="direccion" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Teléfono</label>
-                                            <input type="text" name="telefono" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>fecha de nacimiento</label>
-                                            <input type="date" name="fecha_nacimiento" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Sexo</label>
-                                            <select name="sexo" class="form-control" required>
-                                                <option value="">--Seleccione una opcion--</option>
-                                                <option value="Masculino">Masculino</option>
-                                                <option value="Femenino">Femenino</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            
 
 
 
@@ -175,15 +86,26 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <label>CI del paciente</label>
                                         <input type="text" name="ci_paciente" id="ci_paciente" class="form-control" style="background-color: #fdcc44" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Paciente (Apellidos y nombres)</label>
                                         <input type="text" name="nombre_paciente" id="nombre_paciente" class="form-control" required>
+                                    </div> --}}
+                                    <div class="col-md-12">
+                                    <label>Pacientes</label>
+                                        <select name="paciente_id" id="" class="form-control" required>
+                                            <option value="">--Seleccione una opcion--</option>
+                                            @foreach($pacientes as $p)
+                                                <option value="{{ $p->id }}">
+                                                    {{ $p->perfil->apellido_paterno }} {{ $p->perfil->apellido_materno }} {{ $p->perfil->nombres }} | {{ $p->perfil->ci }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <label>Estado_civil</label>
                                         <select name="estadop_civil_paciente" id="estadop_civil_paciente" class="form-control" required>
                                             <option value="">--Seleccione una opcion--</option>
@@ -192,7 +114,7 @@
                                             <option value="Divorciado/a">Divorciado/a</option>
                                             <option value="Viudo/a">Viudo/a</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -209,14 +131,14 @@
                                 </div>
                                 <div class="row">
                                     
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label>Diagnóstico</label>
-                                        <textarea name="diagnostico" id="diagnostico" cols="30" rows="6" class="form-control" required></textarea>
+                                        <textarea name="diagnostico" id="diagnostico" cols="50" rows="3" class="form-control" required></textarea>
                                     </div>
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <label>Receta:</label>
                                         <textarea name="receta" id="receta" cols="30" rows="6" class="form-control" required></textarea>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -259,9 +181,9 @@
                 <tbody>
                     @foreach($cuadernos as $c)
                         <tr>
-                            <td>{{$c->id}}</td>
-                            <td>{{ $c->nombre }}</td>
-                            <td>{{ $c->estado_civil }}</td>
+                            <td>{{ $c->id}}</td>
+                            <td>{{ $c->paciente->perfil->apellido_paterno }} {{ $c->paciente->perfil->apellido_materno }} {{ $c->paciente->perfil->nombres }}</td>
+                            <td>{{ $c->paciente->perfil->estado_civil }}</td>
                             <td>{{ $c->dato }}</td>
                             <td>{{ $c->edad }}</td>
                             <td>{{ $c->diagnostico }}</td>

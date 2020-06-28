@@ -10,7 +10,8 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <a href="{{ route('indice_certificados') }}" class="btn btn-warning"> < Volver </a>
+        <a href="javascript: history.go(-1)" class="btn btn-warning"> < Volver </a>
+        {{-- <a href="{{ route('indice_certificados') }}" class="btn btn-warning"> < Volver </a> --}}
     </div>
 </div>
 <div class="breadcrumbs">

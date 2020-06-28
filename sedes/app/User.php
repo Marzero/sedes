@@ -57,9 +57,6 @@ class User extends Authenticatable
     {
         return $this->HasMany(Certificado::class);
     }
-    public function copros()
-    {
-        return $this->HasMany(Copro::class);
-    }
+    
 }
 

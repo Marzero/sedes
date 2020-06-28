@@ -17,13 +17,8 @@ class Copro extends Model
             'detalle',
     ];
 
-    public function user()
+    public function orden()
     {
-        return $this->BelongsTo(User::class);
-    }
-    
-    public function paciente()
-    {
-        return $this->BelongsTo(Paciente::class);
+        return $this->BelongsTo(Orden::class);
     }
 }

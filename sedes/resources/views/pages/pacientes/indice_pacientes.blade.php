@@ -22,97 +22,7 @@
             <h1>Indice de pacientes</h1>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#largeModal">
-                Registrar nuevo paciente
-            </button>
-            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="largeModalLabel">Nuevo Paciente</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('store_paciente') }}" method="post">
-                            @csrf
-                            <div class="modal-body">
-                                
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>CI</label>
-                                            <input type="text" name="ci" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Nombres</label>
-                                            <input type="text" name="nombres" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Apellido Paterno</label>
-                                            <input type="text" name="apellido_paterno" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Apellido Materno</label>
-                                            <input type="text" name="apellido_materno" class="form-control">
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Ocupación</label>
-                                            <input type="text" name="ocupacion" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input type="text" name="direccion" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Teléfono</label>
-                                            <input type="text" name="telefono" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>fecha de nacimiento</label>
-                                            <input type="date" name="fecha_nacimiento" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Sexo</label>
-                                            <select name="sexo" class="form-control" required>
-                                                <option value="">--Seleccione una opcion--</option>
-                                                <option value="Masculino">Masculino</option>
-                                                <option value="Femenino">Femenino</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            @include('pages.partes_repitentes.new_paciente_form')
             
             <p class="text-muted m-b-15"></p>
             {{-- <table id="example" class="table table-bordered table-striped table-condensed" style="width:100%"> --}}
@@ -132,6 +42,9 @@
                             <td>{{$p->perfil->apellido_paterno}} {{$p->perfil->apellido_materno}} {{$p->perfil->nombres}}</td>
                             <td>{{ $p->perfil->ci }}</td>
                             <td>
+                                <a href="{{ route('show_paciente',$p->id) }}" class="btn btn-success btn-sm">
+                                    Ver 
+                                </a>
                                 <button type="button" class="btn btn-warning btn-sm mb-1" data-toggle="modal" data-target="#largeModal-edit">
                                     Actualizar datos
                                 </button>
@@ -197,13 +110,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>fecha de nacimiento</label>
                                                                 <input type="date" name="fecha_nacimiento" value="{{ $p->perfil->fecha_nacimiento }}" class="form-control" required>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label>Sexo</label>
                                                                 <select name="sexo" class="form-control" required>
@@ -212,6 +125,16 @@
                                                                     <option value="Femenino" {{ old('sexo',$p->perfil->sexo) == 'Femenino' ? 'selected' : '' }}>Femenino</option>
                                                                 </select>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label>Estado_civil</label>
+                                                            <select name="estado_civil" id="estadop_civil_paciente" class="form-control" required>
+                                                                <option value="">--Seleccione una opcion--</option>
+                                                                <option value="Soltero/a" {{ old('sexo',$p->perfil->estado_civil) == 'Soltero/a' ? 'selected' : '' }}>Soltero/a</option>
+                                                                <option value="Casado/a" {{ old('sexo',$p->perfil->estado_civil) == 'Casado/a' ? 'selected' : '' }}>Casado/a</option>
+                                                                <option value="Divorciado/a" {{ old('sexo',$p->perfil->estado_civil) == 'Divorciado/a' ? 'selected' : '' }}>Divorciado/a</option>
+                                                                <option value="Viudo/a" {{ old('sexo',$p->perfil->estado_civil) == 'Viudo/a' ? 'selected' : '' }}>Viudo/a</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>

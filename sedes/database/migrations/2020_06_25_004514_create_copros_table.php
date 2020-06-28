@@ -15,10 +15,9 @@ class CreateCoprosTable extends Migration
     {
         Schema::create('copros', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->UnsignedBigInteger('user_id');
-            $table->UnsignedBigInteger('paciente_id');
-            $table->string('medico_solicitante');
+            $table->UnsignedBigInteger('orden_id');
             $table->string('edad');
+            $table->string('fecha');
             $table->string('fecha');
             $table->string('detalle');
             $table->timestamps();

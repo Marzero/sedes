@@ -35,15 +35,15 @@
 
     <div class="col-lg-3 col-md-6">
         <div class="social-box facebook">
-            <i class="fa fa-facebook"></i>
+            <i class="fa fa-users"></i>
             <ul>
                 <li>
-                    <span class="count">40</span> k
-                    <span>friends</span>
+                    <span class="count">Pacientes</span> 
+                    <span></span>
                 </li>
                 <li>
-                    <span class="count">450</span>
-                    <span>feeds</span>
+                    <span class="count">{{ count(App\Paciente::all()) }}</span>
+                    <span></span>
                 </li>
             </ul>
         </div>
@@ -54,15 +54,15 @@
 
     <div class="col-lg-3 col-md-6">
         <div class="social-box twitter">
-            <i class="fa fa-twitter"></i>
+            <i class="fa fa-list"></i>
             <ul>
                 <li>
-                    <span class="count">30</span> k
-                    <span>friends</span>
+                    <span class="count">Mordeduras</span>
+                    <span></span>
                 </li>
                 <li>
-                    <span class="count">450</span>
-                    <span>tweets</span>
+                    <span class="count">{{ count(App\Mordedura::all()) }}</span>
+                    <span></span>
                 </li>
             </ul>
         </div>
@@ -73,15 +73,15 @@
 
     <div class="col-lg-3 col-md-6">
         <div class="social-box linkedin">
-            <i class="fa fa-linkedin"></i>
+            <i class="fa fa-list"></i>
             <ul>
                 <li>
-                    <span class="count">40</span> +
-                    <span>contacts</span>
+                    <span class="count">Registros</span> 
+                    <span>Médicos</span>
                 </li>
                 <li>
-                    <span class="count">250</span>
-                    <span>feeds</span>
+                    <span class="count">{{ count(App\Cuaderno::all()) }}</span>
+                    <span></span>
                 </li>
             </ul>
         </div>
@@ -92,15 +92,15 @@
 
     <div class="col-lg-3 col-md-6">
         <div class="social-box google-plus">
-            <i class="fa fa-google-plus"></i>
+            <i class="fa fa-list"></i>
             <ul>
                 <li>
-                    <span class="count">94</span> k
-                    <span>followers</span>
+                    <span class="count">Certificados</span>
+                    <span>Médicos</span>
                 </li>
                 <li>
-                    <span class="count">92</span>
-                    <span>circles</span>
+                    <span class="count">{{ count(App\Certificado::all()) }}</span>
+                    <span></span>
                 </li>
             </ul>
         </div>

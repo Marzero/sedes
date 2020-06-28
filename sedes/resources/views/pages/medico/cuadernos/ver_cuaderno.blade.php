@@ -10,7 +10,8 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <a href="{{ route('inicio_cuadernos') }}" class="btn btn-warning"> < Volver </a>
+        <a href="javascript: history.go(-1)" class="btn btn-warning"> < Volver </a>
+        {{-- <a href="{{ route('inicio_cuadernos') }}" class="btn btn-warning"> < Volver </a> --}}
     </div>
 </div>
 <div class="breadcrumbs">
@@ -35,14 +36,14 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h1>Paciente: {{ $c->nombre }}</h1>
+            <h1>Paciente: {{ $c->paciente->perfil->apellido_paterno }} {{ $c->paciente->perfil->apellido_materno }} {{ $c->paciente->perfil->nombres }}</h1>
         </div>
         <div class="card-body">
             <div class="col-md-12">
                 <ul>
                     <li style="list-style: none"><b>Fecha: </b>{{ $c->fecha }}</li>
                     <li style="list-style: none"><b>Dato: </b>{{ $c->dato }}</li>
-                    <li style="list-style: none"><b>Estado civil: </b>{{ $c->estado_civil }}</li>
+                    <li style="list-style: none"><b>Estado civil: </b>{{ $c->paciente->perfil->estado_civil }}</li>
                     <li style="list-style: none"><b>Diagnostico: </b>{{ $c->diagnostico }}</li>
                 </ul>
                 <hr>

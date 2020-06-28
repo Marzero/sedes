@@ -16,7 +16,7 @@ class CreateMordedurasTable extends Migration
         Schema::create('mordeduras', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('paciente_id')->nullable();
+            $table->unsignedBigInteger('paciente_id');
             
             $table->string('municipio');
             $table->string('establecimiento');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEspecialesTable extends Migration
+class CreateOrdenesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateEspecialesTable extends Migration
      */
     public function up()
     {
-        Schema::create('especiales', function (Blueprint $table) {
+        Schema::create('ordenes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->UnsignedBigInteger('orden_id');
-            $table->string('edad');
-            $table->string('fecha');
-            $table->string('vih');
-            $table->string('rpr');
-            $table->string('serologico');
+            $table->UnsignedBigInteger('user_id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->string('medico_solicitante');
+            $table->string('detalle');
+            $table->string('tipo');
+            $table->string('estado');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateEspecialesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('especiales');
+        Schema::dropIfExists('ordenes');
     }
 }

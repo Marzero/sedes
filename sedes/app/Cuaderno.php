@@ -9,7 +9,7 @@ class Cuaderno extends Model
     protected $table="cuadernos";
 
     protected $fillable=[
-       'user_id',
+       /*'user_id',
        'paciente_id',
        'ci',
        'nombre',
@@ -19,7 +19,16 @@ class Cuaderno extends Model
        'edad',
        'diagnostico',
        'receta',
-       'nro_ficha'
+       'nro_ficha'*/
+
+ 
+            'user_id',
+            'paciente_id',
+            'edad',
+            'fecha',
+            'dato',
+            'diagnostico',
+            'nro_ficha',
     ];
 
     public function user()

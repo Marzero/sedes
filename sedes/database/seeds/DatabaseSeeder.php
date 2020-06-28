@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Perfil;
+use App\Paciente;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class DatabaseSeeder extends Seeder
@@ -41,6 +42,7 @@ class DatabaseSeeder extends Seeder
         $p->direccion='calle #123';
         $p->telefono='77776543';
         $p->sexo='Masculino';
+        $p->estado_civil='Soltero/a';
         $p->save();
 
 
@@ -56,6 +58,27 @@ class DatabaseSeeder extends Seeder
 
 
         $u->givePermissionTo(1,2,3);
+
+
+
+        $p=new Perfil;
+        $p->ci='123457';
+        $p->apellido_paterno='Fernandez';
+        $p->apellido_materno='Rodriguez';
+        $p->nombres='Fernando';
+        $p->fecha_nacimiento='2000-01-01';
+        $p->ocupacion='Ingeniero eléctrico';
+        $p->direccion='Union s/n';
+        $p->telefono='77757775';
+        $p->sexo='Masculino';
+        $p->estado_civil='Soltero/a';
+        $p->save();
+
+        $paciente=new Paciente;
+        $paciente->perfil_id=2;
+        $paciente->estado='activo';
+        $paciente->tipo='regular';
+        $paciente->save();
 
     }
 }

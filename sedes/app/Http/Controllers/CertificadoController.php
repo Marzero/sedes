@@ -27,9 +27,10 @@ class CertificadoController extends Controller
         //dd($request);
         $c=new Certificado($request->all());
         $c->user_id=auth()->user()->id;
+        //dd($c);
         $c->save();
         flash('Certificado guardado correctamente','success');
-        return redirect()->to('show_certificado',$c->id);
+        return redirect()->route('show_certificado',$c->id);
     }
     /*
       

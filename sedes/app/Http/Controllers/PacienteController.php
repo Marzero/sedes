@@ -7,6 +7,10 @@ use App\User;
 use App\Paciente;
 use App\Perfil;
 use App\Dato;
+use App\Cuaderno;
+use App\Orden;
+use App\Mordedura;
+use App\Certificado;
 class PacienteController extends Controller
 {
     public function indice_pacientes()
@@ -47,11 +51,29 @@ class PacienteController extends Controller
         $paciente=Paciente::find($request->paciente_id);
         $perfil=Perfil::find($paciente->perfil_id);
         $perfil->fill($request->all());
+        //dd($perfil);
         $perfil->save();
         //$paciente->fill($request->all());
         //$paciente->save();
         //dd($paciente,$perfil);
         flash('Paciente actualizado correctamente','success');
         return redirect()->route('indice_pacientes');
+    }
+
+    public function show_paciente($id)
+    {
+        $cuadernos=Cuaderno::where('paciente_id',$id)->get();
+        $paciente=Paciente::find($id);
+        $mordeduras=Mordedura::where('paciente_id',$id)->get();
+        $certificados=Certificado::where('paciente_id',$id)->get();
+        return view('pages.pacientes.show_paciente',compact('paciente','cuadernos','mordeduras','certificados'));
+    }
+
+    public function asegurar_paciente($id)
+    {
+        $paciente=Paciente::find($id);
+        $paciente->tipo='asegurado';
+        $paciente->save();
+        return redirect()->back();
     }
 }

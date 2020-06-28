@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('store_paciente','PacienteController@store_paciente')->name('store_paciente');
     Route::post('store_paciente2','PacienteController@store_paciente2')->name('store_paciente2');
     Route::post('actualizar_paciente','PacienteController@actualizar_paciente')->name('actualizar_paciente');
+    Route::get('show_paciente/{id}','PacienteController@show_paciente')->name('show_paciente');
+    Route::get('asegurar_paciente/{id}','PacienteController@asegurar_paciente')->name('asegurar_paciente');
 
 
     Route::get('inicio_cuadernos','CuadernoController@inicio_cuadernos')->name('inicio_cuadernos');

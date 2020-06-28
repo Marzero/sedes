@@ -27,9 +27,8 @@
             <h1>Registros de Mordeduras</h1>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#largeModal">
-                Registrar nuevo paciente
-            </button>
+
+            @include('pages.partes_repitentes.new_paciente_form')
 
             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
                 Nuevo registro de mordedura
@@ -48,95 +47,7 @@
 
 
 
-            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="largeModalLabel">Nuevo Paciente</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('store_paciente2') }}" method="post">
-                            @csrf
-                            <div class="modal-body">
-                                
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>CI</label>
-                                            <input type="text" name="ci" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Nombres</label>
-                                            <input type="text" name="nombres" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Apellido Paterno</label>
-                                            <input type="text" name="apellido_paterno" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Apellido Materno</label>
-                                            <input type="text" name="apellido_materno" class="form-control">
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Ocupación</label>
-                                            <input type="text" name="ocupacion" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input type="text" name="direccion" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Teléfono</label>
-                                            <input type="text" name="telefono" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>fecha de nacimiento</label>
-                                            <input type="date" name="fecha_nacimiento" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Sexo</label>
-                                            <select name="sexo" class="form-control" required>
-                                                <option value="">--Seleccione una opcion--</option>
-                                                <option value="Masculino">Masculino</option>
-                                                <option value="Femenino">Femenino</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+         
 
 
 
@@ -181,7 +92,19 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-10">
+                                        <label>Pacientes</label>
+                                            <select name="paciente_id" id="" class="form-control" required>
+                                                <option value="">--Seleccione una opcion--</option>
+                                                @foreach($pacientes as $p)
+                                                    <option value="{{ $p->id }}">
+                                                        {{ $p->perfil->apellido_paterno }} {{ $p->perfil->apellido_materno }} {{ $p->perfil->nombres }} | {{ $p->perfil->ci }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    {{-- 
+                                        <div class="col-md-3">
                                         <label>CI del paciente</label>
                                         <input type="text" name="ci_paciente" id="ci_paciente" class="form-control" style="background-color: #fdcc44">
                                     </div>
@@ -197,6 +120,7 @@
                                             <option value="Femenino">Femenino</option>
                                         </select>
                                     </div>
+                                        --}}
                                     <div class="col-md-2">
                                         <label>Edad</label>
                                         <input type="number" name="edad_paciente" id="edad_paciente" class="form-control" required>
@@ -204,10 +128,10 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <label>Dirección</label>
                                         <input type="text" name="direc_paciente" id="direc_paciente" value="" class="form-control" required>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-4">
                                         <label>Fecha de mordedura</label>
                                         <input type="date" name="fecha_mordedura" id="fecha_mordedura" value="" class="form-control" required>
@@ -216,14 +140,15 @@
                                         <label>Donde fue mordido</label>
                                         <input type="text" name="donde" id="donde" class="form-control" required>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-4">
                                         <label>Localización de la mordedura</label>
                                         <input type="text" name="localizacion_mordedura" id="localizacion_mordedura" value="" class="form-control" required>
                                     </div>
-                                    <div class="col-md-4">
+                                </div>
+
+                                <div class="row">
+                                   
+                                    <div class="col-md-6">
                                         <label>Herida</label>
                                         <select name="herida" id="herida" class="form-control" required>
                                             <option value="">--seleccione una opción--</option>
@@ -231,7 +156,7 @@
                                             <option value="Múltiple">Múltiple</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label>Tipo Herida</label>
                                         <select name="tipo_herida" id="tipo_herida" class="form-control" required>
                                             <option value="">--seleccione una opción--</option>
@@ -311,10 +236,7 @@
                     <tr>
                         <th>Nro.</th>
                         <th>Nombre</th>
-                        <th>Estado civil</th>
-                        <th>Dato</th>
                         <th>Edad</th>
-                        <th>Diagnostico</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -323,10 +245,7 @@
                         <tr>
                             <td>{{ $m->id }}</td>
                             <td>{{ $m->nombre }}</td>
-                            <td>{{ $m->estado_civil }}</td>
-                            <td>{{ $m->dato }}</td>
                             <td>{{ $m->edad }}</td>
-                            <td>{{ $m->diagnostico }}</td>
                             <td>
                                 <a href="{{ route('show_mordedura',$m->id) }}">Ver detalles</a>
                             </td>
@@ -337,10 +256,7 @@
                     <tr>
                         <th>Nro.</th>
                         <th>Nombre</th>
-                        <th>Estado civil</th>
-                        <th>Dato</th>
                         <th>Edad</th>
-                        <th>Diagnostico</th>
                         <th>Opciones</th>
                     </tr>
                 </tfoot>
