@@ -17,8 +17,7 @@ class CreateOrdenesTable extends Migration
             $table->bigIncrements('id');
             $table->UnsignedBigInteger('user_id');
             $table->UnsignedBigInteger('paciente_id');
-            $table->string('medico_solicitante');
-            $table->string('detalle');
+            $table->text('detalle');
             $table->string('tipo');
             $table->string('estado');
             $table->timestamps();

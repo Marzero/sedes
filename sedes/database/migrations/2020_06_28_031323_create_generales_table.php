@@ -48,7 +48,8 @@ class CreateGeneralesTable extends Migration
             $table->string('flora_microbiana')->nullable();
             $table->string('filiamento_mucoso')->nullable();
             $table->string('hifas_esporas')->nullable();
-
+            $table->UnsignedBigInteger('user_id');
+            $table->string('tipo')->default('interno');
             $table->timestamps();
         });
     }

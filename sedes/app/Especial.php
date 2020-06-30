@@ -15,6 +15,8 @@ class Especial extends Model
         'vih',
         'rpr',
         'serologico',
+        'user_id',
+        'tipo'
     ];
 
     public function orden()

@@ -42,6 +42,8 @@ class General extends Model
         'flora_microbiana',
         'filiamento_mucoso',
         'hifas_esporas',
+        'user_id',
+        'tipo'
     ];
 
     public function orden()

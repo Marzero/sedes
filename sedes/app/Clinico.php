@@ -41,6 +41,8 @@ class Clinico extends Model
             'irn',
             'glucosa',
             'creatinina',
+            'user_id',
+            'tipo'
     ];
 
     public function orden()

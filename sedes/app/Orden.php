@@ -11,11 +11,14 @@ class Orden extends Model
     protected $fillable=[
         'user_id',
         'paciente_id',
-        'medico_solicitante',
         'detalle',
         'tipo',
         'estado',
     ];
+    public function paciente()
+    {
+        return $this->BelongsTo(Paciente::class);
+    }
 
     public function copros()
     {
@@ -40,5 +43,9 @@ class Orden extends Model
     public function quimicos()
     {
         return $this->HasMany(Quimico::class);
+    }
+    public function user()
+    {
+        return $this->BelongsTo(User::class);
     }
 }

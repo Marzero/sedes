@@ -15,6 +15,8 @@ class Copro extends Model
             'edad',
             'fecha',
             'detalle',
+            'user_id',
+            'tipo'
     ];
 
     public function orden()

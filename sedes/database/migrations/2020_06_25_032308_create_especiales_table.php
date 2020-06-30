@@ -21,6 +21,8 @@ class CreateEspecialesTable extends Migration
             $table->string('vih');
             $table->string('rpr');
             $table->string('serologico');
+            $table->UnsignedBigInteger('user_id');
+            $table->string('tipo')->default('interno');
             $table->timestamps();
         });
     }

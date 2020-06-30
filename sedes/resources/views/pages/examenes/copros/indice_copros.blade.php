@@ -24,34 +24,14 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h1>Atenciones diarias (cuaderno médico)</h1>
+            <h1>Examenes Coproparasitológicos</h1>
         </div>
         <div class="card-body">
 
-            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
+            {{-- 
+                <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
                 Nuevo registro de examen
             </button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -70,39 +50,6 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <b>Fecha: </b> {{ date('Y-m-d') }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>CI del paciente</label>
-                                        <input type="text" name="ci_paciente" id="ci_paciente" class="form-control" style="background-color: #fdcc44" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Paciente (Apellidos y nombres)</label>
-                                        <input type="text" name="nombre_paciente" id="nombre_paciente" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Estado_civil</label>
-                                        <select name="estadop_civil_paciente" id="estadop_civil_paciente" class="form-control" required>
-                                            <option value="">--Seleccione una opcion--</option>
-                                            <option value="Soltero/a">Soltero/a</option>
-                                            <option value="Casado/a">Casado/a</option>
-                                            <option value="Divorciado/a">Divorciado/a</option>
-                                            <option value="Viudo/a">Viudo/a</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Dato </label><input type="checkbox" name="dato" id="cbox1" value="si" class="form-control"> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Nro de ficha</label>
-                                        <input type="text" name="nro_ficha" id="nro_ficha" value="" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Edad</label>
-                                        <input type="text" name="edad" id="edad" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -128,6 +75,7 @@
                 </div>
             </div>
 
+                --}}
 
 
 
@@ -140,31 +88,99 @@
 
 
             
-            <p class="text-muted m-b-15"></p>
+            <h3>Examenes registrados</h3>
             {{-- <table id="example" class="table table-bordered table-striped table-condensed" style="width:100%"> --}}
             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Nro.</th>
-                        <th>Nombre</th>
-                        <th>Estado civil</th>
-                        <th>Dato</th>
-                        <th>Edad</th>
-                        <th>Diagnostico</th>
+                        <th>Paciente</th>
+                        <th>Solicitante</th>
+                        <th>fecha</th>
+                        <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($cuadernos as $c)
+                    @foreach($ordenes as $ord)
                         <tr>
-                            <td>{{$c->id}}</td>
-                            <td>{{ $c->nombre }}</td>
-                            <td>{{ $c->estado_civil }}</td>
-                            <td>{{ $c->dato }}</td>
-                            <td>{{ $c->edad }}</td>
-                            <td>{{ $c->diagnostico }}</td>
+                            <td>{{ $ord->id}}</td>
+                            <td>{{ $ord->paciente->perfil->apellido_paterno }} {{ $ord->paciente->perfil->apellido_materno }} {{ $ord->paciente->perfil->nombres }}</td>
+                            <td>{{ $ord->user->perfil->apellido_paterno }} {{ $ord->user->perfil->apellido_materno }} {{ $ord->user->perfil->nombres }}</td>
+                            <td>{{ $ord->created_at }}</td>
+                            <td>{{ $ord->estado }}</td>
                             <td>
-                                <a href="{{ route('ver_cuaderno',$c->id) }}">Ver detalles</a>
+                                <a href="{{ route('show_orden',$ord->id) }}">Ver</a>
+
+
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#resultadosform">
+                                    Agregar resultados
+                                </button>
+                    
+                    
+                                <div class="modal fade" id="resultadosform" tabindex="-1" role="dialog" aria-labelledby="resultadosformLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="mediumModalLabel">Registrar resultados del analisis</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{{ route('agregar_resultados') }}" method="post" autocomplete="off">
+                                                @csrf
+                                                <input type="hidden" name="orden_id" value="{{ $ord->id }}">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <ul>
+                                                                <li style="list-style: none"><b>Orden nro: </b> {{ $ord->id }}</li>
+                                                                <li style="list-style: none"><b>Usuario que registro la orden: </b> {{ $ord->user->perfil->apellido_paterno }} {{ $ord->user->perfil->apellido_materno }} {{ $ord->user->perfil->nombres }}</li>
+                                                                <li style="list-style: none"><b>Paciente: </b> {{ $ord->paciente->perfil->apellido_paterno }} {{ $ord->paciente->perfil->apellido_materno }} {{ $ord->paciente->perfil->nombres }}</li>
+                                                                <li style="list-style: none"><b>Fecha de nacimiento del paciente: </b> {{ $ord->paciente->perfil->fecha_nacimiento }}</li>
+                                                                <li style="list-style: none"><b>Fecha actual: </b> {{ date('Y-m-d') }}</li>
+                                                                <li style="list-style: none"><b>Fecha de registro de orden: </b> {{ $ord->created_at }}</li>
+                                                                <li style="list-style: none"><b>Descripción: </b> {{ $ord->detalle }}</li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                        $fecha_nac=$ord->paciente->perfil->fecha_nacimiento;
+                                                        function calculaedad($fechanacimiento){
+                                                            list($ano,$mes,$dia) = explode("-",$fechanacimiento);
+                                                            $ano_diferencia  = date("Y") - $ano;
+                                                            $mes_diferencia = date("m") - $mes;
+                                                            $dia_diferencia   = date("d") - $dia;
+                                                            if ($dia_diferencia < 0 || $mes_diferencia < 0)
+                                                                $ano_diferencia--;
+                                                            return $ano_diferencia;
+                                                        }
+                                                        //dd($fecha_nac,calculaedad($fecha_nac));
+                                                    @endphp     
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label>Edad</label>
+                                                            <input type="number" name="edad" value="{{ calculaedad($fecha_nac) }}" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label>Se observan:</label>
+                                                            <textarea name="detalle" id="detalle" cols="30" rows="6" class="form-control" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Confirmar
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -172,15 +188,56 @@
                 <tfoot>
                     <tr>
                         <th>Nro.</th>
-                        <th>Nombre</th>
-                        <th>Estado civil</th>
-                        <th>Dato</th>
-                        <th>Edad</th>
-                        <th>Diagnostico</th>
+                        <th>Paciente</th>
+                        <th>Solicitante</th>
+                        <th>fecha</th>
+                        <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
                 </tfoot>
             </table>
+            <hr>
+            {{-- 
+                <h3>
+                Ordenes pendientes
+            </h3>
+            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nro.</th>
+                        <th>Paciente</th>
+                        <th>Solicitante</th>
+                        <th>fecha</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($ordenes as $ord)
+                        <tr>
+                            <td>{{ $ord->id}}</td>
+                            <td>{{ $ord->paciente->perfil->apellido_paterno }} {{ $ord->paciente->perfil->apellido_materno }} {{ $ord->paciente->perfil->nombres }}</td>
+                            <td>{{ $ord->user->perfil->apellido_paterno }} {{ $ord->user->perfil->apellido_materno }} {{ $ord->user->perfil->nombres }}</td>
+                            <td>{{ $ord->created_at }}</td>
+                            <td>{{ $ord->estado }}</td>
+                            <td>
+                                <a href="{{ route('show_copro',$ord->id) }}">Ver detalles</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Nro.</th>
+                        <th>Paciente</th>
+                        <th>Solicitante</th>
+                        <th>fecha</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+                --}}
         </div>
     </div>
 </div>

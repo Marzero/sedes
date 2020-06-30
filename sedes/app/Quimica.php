@@ -31,7 +31,9 @@ class Quimica extends Model
             'albumina',
             'r',
             'amilasa',
-            'calcio'
+            'calcio',
+            'user_id',
+            'tipo'
     ];
 
     public function orden()

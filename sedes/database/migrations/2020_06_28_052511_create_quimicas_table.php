@@ -38,7 +38,8 @@ class CreateQuimicasTable extends Migration
             $table->string('r')->nullable();
             $table->string('amilasa')->nullable();
             $table->string('calcio')->nullable();
-
+            $table->UnsignedBigInteger('user_id');
+            $table->string('tipo')->default('interno');
             $table->timestamps();
         });
     }

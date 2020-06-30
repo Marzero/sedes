@@ -47,7 +47,8 @@ class CreateClinicosTable extends Migration
             $table->string('irn')->nullable();
             $table->string('glucosa')->nullable();
             $table->string('creatinina')->nullable();
-            
+            $table->UnsignedBigInteger('user_id');
+            $table->string('tipo')->default('interno');
             $table->timestamps();
         });
     }

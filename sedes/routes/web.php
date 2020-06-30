@@ -65,4 +65,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('indice_certificados','CertificadoController@indice_certificados')->name('indice_certificados');
     Route::post('store_certificado','CertificadoController@store_certificado')->name('store_certificado');
     Route::get('show_certificado/{id}','CertificadoController@show_certificado')->name('show_certificado');
+
+    Route::get('indice_ordenes','OrdenController@indice_ordenes')->name('indice_ordenes');
+    Route::get('show_orden/{id}','OrdenController@show_orden')->name('show_orden');
+    Route::post('store_orden','OrdenController@store_orden')->name('store_orden');
+    Route::post('agregar_resultados','OrdenController@agregar_resultados')->name('agregar_resultados');
+
+    Route::get('indice_copros','CoproController@indice_copros')->name('indice_copros');
+    Route::get('show_copro/{id}','CoproController@show_copro')->name('show_copro');
+    Route::post('store_copro','CoproController@store_copro')->name('store_copro');
 });

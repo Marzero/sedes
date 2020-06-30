@@ -57,6 +57,11 @@ class User extends Authenticatable
     {
         return $this->HasMany(Certificado::class);
     }
+
+    public function ordenes()
+    {
+        return $this->HasMany(Orden::class);
+    }
     
 }
 

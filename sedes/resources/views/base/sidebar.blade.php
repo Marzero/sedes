@@ -80,7 +80,8 @@
                         <i class="menu-icon fa fa-laptop"></i>Examenes
                     </a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_certificados') }}">Coproparasitológico</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_ordenes') }}">Ordenes</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_copros') }}">Coproparasitológico</a></li>
                         <li><i class="fa fa-puzzle-piece"></i><a href="#">General de orina</a></li>
                         <li><i class="fa fa-puzzle-piece"></i><a href="#">Laboratorio clinico</a></li> 
                         <li><i class="fa fa-puzzle-piece"></i><a href="#">Especiales</a></li> 

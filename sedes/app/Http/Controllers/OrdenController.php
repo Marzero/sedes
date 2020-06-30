@@ -14,12 +14,15 @@ class OrdenController extends Controller
     public function indice_ordenes()
     {
         $ordenes=Orden::all();
-        return view('pages.ordenes.indice_ordenes',compact('ordenes'));
+        $pacientes=Paciente::all();
+        return view('pages.examenes.ordenes.indice_ordenes',compact('ordenes','pacientes'));
     }
 
     public function store_orden(Request $request)
     {
         $o=new Orden($request->all());
+        //dd($o);
+        $o->estado='pendiente';
         $o->save();
         flash('Orden registrada correctamente','success');
         return redirect()->back();
@@ -27,8 +30,27 @@ class OrdenController extends Controller
 
     public function show_orden($id)
     {
+        //dd($id);
         $o=Orden::find($id);
-        return view('pages.ordenes.show_orden',compact('o'));
+        //dd($o);
+        return view('pages.examenes.ordenes.show_orden',compact('o'));
+    }
+
+    public function agregar_resultados(Request $request)
+    {
+        $orden=Orden::find($request->orden_id);
+        $copro=new Copro;
+        $copro->orden_id=$request->orden_id;
+        $copro->edad=$request->edad;
+        $copro->fecha=date('Y-m-d');
+        $copro->detalle=$request->detalle;
+        $copro->user_id=auth()->user()->id;
+        //dd($orden,$copro);
+        $copro->save();
+        $orden->estado='realizado';
+        $orden->save();
+        flash('resultados almacenados correctamente','success');
+        return redirect()->route('show_orden',$orden->id);
     }
 
     public function imprimir_orden($id)
