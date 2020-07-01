@@ -9,6 +9,7 @@ use App\Orden;
 use App\Copro;
 use App\Especial;
 use App\Perfil;
+use App\Gene;
 class OrdenController extends Controller
 {
     public function indice_ordenes()
@@ -33,7 +34,17 @@ class OrdenController extends Controller
         //dd($id);
         $o=Orden::find($id);
         //dd($o);
-        return view('pages.examenes.ordenes.show_orden',compact('o'));
+        if($o->tipo=='copro'){
+            $copro=Copro::where('orden_id',$o->id)->first();
+            return view('pages.examenes.ordenes.show_orden',compact('o','copro'));
+        }elseif($o->tipo=='especial'){
+            $espe=Especial::where('orden_id',$o->id)->first();
+            return view('pages.examenes.ordenes.show_orden',compact('o','espe'));
+        }
+        elseif($o->tipo=='general'){
+            $gene=General::where('orden_id',$o->id)->first();
+            return view('pages.examenes.ordenes.show_orden',compact('o','gene'));
+        }
     }
 
     public function agregar_resultados(Request $request)

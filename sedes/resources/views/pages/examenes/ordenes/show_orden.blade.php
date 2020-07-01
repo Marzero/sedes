@@ -43,19 +43,35 @@
                 <ul>
                     <li style="list-style: none"><b>Fecha de registro de orden: </b>{{ $o->created_at }}</li>
                     <li style="list-style: none"><b>Medico Solicitante: </b>{{ $o->paciente->perfil->apellido_paterno }} {{ $o->paciente->perfil->apellido_materno }} {{ $o->paciente->perfil->nombres }}</li>
-                    <li style="list-style: none"><b>Diagnostico: </b></li>
+                    <li style="list-style: none"><b>Tipo de examen: </b>{{ $o->tipo }}</li>
                 </ul>
                 <hr>
                 <h1>RESULTADOS</h1>
-                @if($o->tipo=='copro')
-                    @php
-                        $copro=App\Copro::where('orden_id',$o->id)->first();
-                    @endphp
+                @isset($copro)
                     <h3>EXAMEN COPROPARASITOLOGICO</h3>
-                    <p><b>Se Observan: </b>{{ $copro->detalle }}</p>
-                @else 
+                    <b>Se Observan: </b>{{ $copro->detalle }}
+                @endisset
 
-                @endif
+                @isset($espe)
+                    <h3>EXAMENES ESPECIALES</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>V.I.H.</th>
+                                        <td>R.P.R.</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <b>Se Observan: </b>{{ $copro->detalle }}
+                @endisset
             </div>
         </div>
     </div>
