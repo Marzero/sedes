@@ -82,9 +82,11 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_ordenes') }}">Ordenes</a></li>
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_copros') }}">Coproparasitológico</a></li>
-                        <li><i class="fa fa-puzzle-piece"></i><a href="#">General de orina</a></li>
-                        <li><i class="fa fa-puzzle-piece"></i><a href="#">Laboratorio clinico</a></li> 
-                        <li><i class="fa fa-puzzle-piece"></i><a href="#">Especiales</a></li> 
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_generales') }}">General de orina</a></li>
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_clinicos') }}">Laboratorio clinico</a></li> 
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_especiales') }}">Especiales</a></li> 
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_quimicas') }}">Quimica sanguínea</a></li> 
+                        
                     </ul>
                 </li>
                 

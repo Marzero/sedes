@@ -45,9 +45,7 @@ class CreateGeneralesTable extends Migration
             $table->string('cilindros_mixtos')->nullable();
             $table->string('cilindros_hematicos')->nullable();
             $table->string('cilindros_leucocitarios')->nullable();
-            $table->string('flora_microbiana')->nullable();
-            $table->string('filiamento_mucoso')->nullable();
-            $table->string('hifas_esporas')->nullable();
+            $table->text('otros')->nullable();
             $table->UnsignedBigInteger('user_id');
             $table->string('tipo')->default('interno');
             $table->timestamps();

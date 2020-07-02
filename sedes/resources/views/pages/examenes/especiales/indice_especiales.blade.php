@@ -35,71 +35,14 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h1>Examenes Coproparasitológicos</h1>
+            <h1>Examenes Especiales</h1>
         </div>
         <div class="card-body">
-
-            {{-- 
-                <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
-                Nuevo registro de examen
-            </button>
-
-
-            <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="mediumModalLabel">Registrar nueva atención médica</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('nueva_atencion') }}" method="post" autocomplete="off">
-                            @csrf
-                            <input type="hidden" name="id_paciente" value="" id="id_paciente">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <b>Fecha: </b> {{ date('Y-m-d') }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    
-                                    <div class="col-md-6">
-                                        <label>Diagnóstico</label>
-                                        <textarea name="diagnostico" id="diagnostico" cols="30" rows="6" class="form-control" required></textarea>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Receta:</label>
-                                        <textarea name="receta" id="receta" cols="30" rows="6" class="form-control" required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">
-                                    Confirmar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-                --}}
-
-
-
-
-
-
-
-
 
 
 
             
-            <h3>Examenes registrados</h3>
+            <h3>Examenes especiales registrados</h3>
             {{-- <table id="example" class="table table-bordered table-striped table-condensed" style="width:100%"> --}}
             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                 <thead>
@@ -123,10 +66,10 @@
                             <td>
                                 <a href="{{ route('show_orden',$ord->id) }}">Ver</a>
                                 @php
-                                    $co=App\Copro::where('orden_id',$ord->id)->first();    
+                                    $es=App\Especial::where('orden_id',$ord->id)->first();    
                                 @endphp
                                 
-                                @if($co==null)
+                                @if($es==null)
                                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#resultadosform">
                                         Agregar resultados
                                     </button>
@@ -139,7 +82,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('agregar_resultados') }}" method="post" autocomplete="off">
+                                                <form action="{{ route('agregar_resultados_especiales') }}" method="post" autocomplete="off">
                                                     @csrf
                                                     <input type="hidden" name="orden_id" value="{{ $ord->id }}">
                                                     <div class="modal-body">
@@ -159,8 +102,6 @@
                                                         </div>
                                                         @php
                                                             $fecha_nac=$ord->paciente->perfil->fecha_nacimiento;
-                                                            
-                                                            //dd($fecha_nac,calculaedad($fecha_nac));
                                                         @endphp     
                                                         <div class="row">
                                                             <div class="col-md-12">
@@ -169,9 +110,29 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>V.I.H.:</label>
+                                                                {{-- <input type="text" name="vih" class="form-control" required> --}}
+                                                                <select name="vih" id="" required class="form-control">
+                                                                    <option value="">--Seleccione una opcion--</option>
+                                                                    <option value="Negativo">Negativo</option>
+                                                                    <option value="Positivo">Positivo</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label>R.P.R.:</label>
+                                                                {{-- <input type="text" name="rpr" class="form-control" required> --}}
+                                                                <select name="rpr" id="" required class="form-control">
+                                                                    <option value="">--Seleccione una opcion--</option>
+                                                                    <option value="Reactivo">Reactivo</option>
+                                                                    <option value="No reactivo">No reactivo</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-md-12">
-                                                                <label>Se observan:</label>
-                                                                <textarea name="detalle" id="detalle" cols="30" rows="6" class="form-control" required></textarea>
+                                                                <label>Edad</label>
+                                                                <textarea name="serologico" id="" cols="50" rows="3" class="form-control"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -186,9 +147,6 @@
                                         </div>
                                     </div>
                                 @endif
-
-
-                                
                             </td>
                         </tr>
                     @endforeach
@@ -204,48 +162,6 @@
                     </tr>
                 </tfoot>
             </table>
-            <hr>
-            {{-- 
-                <h3>
-                Ordenes pendientes
-            </h3>
-            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nro.</th>
-                        <th>Paciente</th>
-                        <th>Solicitante</th>
-                        <th>fecha</th>
-                        <th>Estado</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($ordenes as $ord)
-                        <tr>
-                            <td>{{ $ord->id}}</td>
-                            <td>{{ $ord->paciente->perfil->apellido_paterno }} {{ $ord->paciente->perfil->apellido_materno }} {{ $ord->paciente->perfil->nombres }}</td>
-                            <td>{{ $ord->user->perfil->apellido_paterno }} {{ $ord->user->perfil->apellido_materno }} {{ $ord->user->perfil->nombres }}</td>
-                            <td>{{ $ord->created_at }}</td>
-                            <td>{{ $ord->estado }}</td>
-                            <td>
-                                <a href="{{ route('show_copro',$ord->id) }}">Ver detalles</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Nro.</th>
-                        <th>Paciente</th>
-                        <th>Solicitante</th>
-                        <th>fecha</th>
-                        <th>Estado</th>
-                        <th>Opciones</th>
-                    </tr>
-                </tfoot>
-            </table>
-                --}}
         </div>
     </div>
 </div>

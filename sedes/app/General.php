@@ -39,9 +39,7 @@ class General extends Model
         'cilindros_mixtos',
         'cilindros_hematicos',
         'cilindros_leucocitarios',
-        'flora_microbiana',
-        'filiamento_mucoso',
-        'hifas_esporas',
+        'otros',
         'user_id',
         'tipo'
     ];

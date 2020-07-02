@@ -44,6 +44,7 @@ class CreateClinicosTable extends Migration
             $table->string('t_de_coagulacion')->nullable();
             $table->string('t_desangria')->nullable();
             $table->string('t_de_protombina')->nullable();
+            $table->string('c_protombina')->nullable();
             $table->string('irn')->nullable();
             $table->string('glucosa')->nullable();
             $table->string('creatinina')->nullable();

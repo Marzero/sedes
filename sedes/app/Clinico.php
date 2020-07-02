@@ -38,6 +38,7 @@ class Clinico extends Model
             't_de_coagulacion',
             't_desangria',
             't_de_protombina',
+            'c_protombina',
             'irn',
             'glucosa',
             'creatinina',

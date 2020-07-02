@@ -69,9 +69,38 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('indice_ordenes','OrdenController@indice_ordenes')->name('indice_ordenes');
     Route::get('show_orden/{id}','OrdenController@show_orden')->name('show_orden');
     Route::post('store_orden','OrdenController@store_orden')->name('store_orden');
+
+
+
+
     Route::post('agregar_resultados','OrdenController@agregar_resultados')->name('agregar_resultados');
+    Route::post('agregar_resultados_especiales','OrdenController@agregar_resultados_especiales')->name('agregar_resultados_especiales');
+    Route::post('agregar_resultados_clinicos','OrdenController@agregar_resultados_clinicos')->name('agregar_resultados_clinicos');
+    Route::post('agregar_resultados_generales','OrdenController@agregar_resultados_generales')->name('agregar_resultados_generales');
+    Route::post('agregar_resultados_quimicas','OrdenController@agregar_resultados_quimicas')->name('agregar_resultados_quimicas');
+    
+
+
 
     Route::get('indice_copros','CoproController@indice_copros')->name('indice_copros');
     Route::get('show_copro/{id}','CoproController@show_copro')->name('show_copro');
     Route::post('store_copro','CoproController@store_copro')->name('store_copro');
+
+    Route::get('indice_especiales','EspecialController@indice_especiales')->name('indice_especiales');
+    Route::get('show_especial/{id}','EspecialController@show_especial')->name('show_especial');
+    Route::post('store_especial','EspecialController@store_especial')->name('store_especial');
+
+    Route::get('indice_clinicos','ClinicoController@indice_clinicos')->name('indice_clinicos');
+    Route::get('show_clinico/{id}','ClinicoController@show_clinico')->name('show_clinico');
+    Route::post('store_clinico','ClinicoController@store_clinico')->name('store_clinico');
+
+    Route::get('indice_generales','GeneralController@indice_generales')->name('indice_generales');
+    Route::get('show_general/{id}','GeneralController@show_general')->name('show_general');
+    Route::post('store_general','GeneralController@store_general')->name('store_general');
+
+    
+
+    Route::get('indice_quimicas','QuimicaController@indice_quimicas')->name('indice_quimicas');
+    Route::get('show_quimica/{id}','QuimicaController@show_quimica')->name('show_quimica');
+    Route::post('store_quimica','QuimicaController@store_quimica')->name('store_quimica');
 });
