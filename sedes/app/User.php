@@ -62,6 +62,11 @@ class User extends Authenticatable
     {
         return $this->HasMany(Orden::class);
     }
+
+    public function enfermerias()
+    {
+        return $this->HasMany(Enfermeria::class);
+    }
     
 }
 
