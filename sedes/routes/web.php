@@ -105,4 +105,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('store_quimica','QuimicaController@store_quimica')->name('store_quimica');
 
     Route::get('indice_enfermerias','EnfermeriaController@indice_enfermerias')->name('indice_enfermerias');
+    Route::post('store_enfermeria','EnfermeriaController@store_enfermeria')->name('store_enfermeria');
 });
