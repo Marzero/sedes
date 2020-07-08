@@ -74,6 +74,9 @@ class PacienteController extends Controller
         $paciente=Paciente::find($id);
         $paciente->tipo='asegurado';
         $paciente->save();
+        $dato=new Dato;
+        $dato->paciente_id=$paciente->id;
+        $dato->save();
         return redirect()->back();
     }
 }

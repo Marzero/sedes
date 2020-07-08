@@ -169,7 +169,7 @@
 
                                     <div class="tab-content pl-3 p-1" id="myTabContent">
                                         <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                            <h3>Home</h3>
+                                            <h3>Datos iniciales</h3>
                                             <p>Some content here.</p>
                                         </div>
                                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

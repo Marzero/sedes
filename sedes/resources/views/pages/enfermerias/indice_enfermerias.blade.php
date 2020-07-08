@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <label>Paciente</label>
                                         <select name="paciente_id" class="form-control" required>
                                             <option value="">--Seleccione una opción--</option>
@@ -73,17 +73,35 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="col-md-6">
+                                        <label>Edad</label>
+                                        <input type="text" name="edad" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Doctor que atendio al paciente:</label>
+                                        <select name="doctor_id" class="form-control" required>
+                                            <option value="">--Seleccione una opción--</option>
+                                            @foreach($medicos as $m)
+                                                <option value="{{ $m->id }}">
+                                                {{ $m->perfil->apellido_paterno }} {{ $m->perfil->apellido_materno }} {{ $m->perfil->nombres }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Diagnóstico</label>
-                                        <textarea name="diagnostico" id="diagnostico" cols="30" rows="6" class="form-control" required></textarea>
+                                        <label>Detalle</label>
+                                        <input type="text" name="detalle" class="form-control" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label>Receta:</label>
-                                        <textarea name="receta" id="receta" cols="30" rows="6" class="form-control" required></textarea>
+                                        <label>Dato</label>
+                                        <input type="checkbox" class="form-control" value="si" name="dato">
                                     </div>
                                 </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -104,21 +122,35 @@
                         <th>Nro.</th>
                         <th>Paciente</th>
                         <th>Solicitante</th>
-                        <th>fecha</th>
-                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Dato</th>
+                        <th>Registrado por</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                   
+                   @foreach ($enfermerias as $en)
+                   @php
+                       $doc=App\User::find($en->doctor_id);
+                   @endphp
+                    <tr>
+                        <td>{{ $en->id }}</td>
+                        <td>{{ $en->paciente->perfil->apellido_paterno }} {{ $en->paciente->perfil->apellido_materno }} {{ $en->paciente->perfil->nombres }}</td>
+                        <td>{{ $doc->perfil->apellido_paterno }} {{ $doc->perfil->apellido_materno }} {{ $doc->perfil->nombres }}</td>
+                        <td>{{ $en->fecha }}</td>
+                        <td>{{ $en->dato }}</td>
+                        <td>{{ $en->user->perfil->apellido_paterno }} {{ $en->user->perfil->apellido_materno }} {{ $en->user->perfil->nombres }}</td>
+                    </tr>
+                   @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
                         <th>Nro.</th>
                         <th>Paciente</th>
                         <th>Solicitante</th>
-                        <th>fecha</th>
-                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Dato</th>
+                        <th>Registrado por</th>
                         <th>Opciones</th>
                     </tr>
                 </tfoot>

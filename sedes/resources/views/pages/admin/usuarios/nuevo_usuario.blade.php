@@ -72,17 +72,30 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select name="tipo" class="form-control" required>
+                                <option value="">--Seleccione una opcion--</option>
+                                <option value="medico">Medico</option>
+                                <option value="laboratorista">Laboratorista</option>
+                                <option value="admin">Administrador</option>
+                                <option value="enfermeria">Enfermeria</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Sexo</label>
                             <select name="sexo" class="form-control" required>
                                 <option value="">--Seleccione una opcion--</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
+                                
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>E-mail</label>
                             <input type="email" name="email" class="form-control" required>

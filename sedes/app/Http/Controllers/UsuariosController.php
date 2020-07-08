@@ -39,6 +39,7 @@ class UsuariosController extends Controller
         $u=new User($request->all());
         $u->perfil_id=$p->id;
         $u->estado='activo';
+        $u->tipo=$request->tipo;
         $u->password=bcrypt('123');
         $u->save();
         flash('Usuario guardado correctamente','primary');

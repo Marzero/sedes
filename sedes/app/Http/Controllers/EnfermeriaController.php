@@ -13,13 +13,17 @@ class EnfermeriaController extends Controller
     {
         $enfermerias=Enfermeria::all();
         $pacientes=Paciente::all();
-        return view('pages.enfermerias.indice_enfermerias',compact('enfermerias','pacientes'));
+        $medicos=User::where('tipo','medico')->get();
+        return view('pages.enfermerias.indice_enfermerias',compact('enfermerias','pacientes','medicos'));
     }
 
     public function store_enfermeria(Request $request)
     {
         $e=new Enfermeria($request->all());
-        dd($e);
+        //dd($e);
+        $e->fecha=date('Y-m-d');
+        $e->ficha=' ';
+        $e->user_id=auth()->user()->id;
         $e->save();
         flash('Registro creado correctamente','success');
         return redirect()->back();
