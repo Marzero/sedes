@@ -15,6 +15,10 @@ class CreatePatologicosTable extends Migration
     {
         Schema::create('patologicos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->string('hospitalizaciones_por');
+            $table->integer('anio');
+            $table->string('evolucion');
             $table->timestamps();
         });
     }

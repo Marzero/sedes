@@ -15,6 +15,16 @@ class CreateVacunasTable extends Migration
     {
         Schema::create('vacunas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->integer('bcg')->nullable();
+            $table->integer('polio')->nullable();
+            $table->integer('dpt')->nullable();
+            $table->integer('pentavalente')->nullable();
+            $table->integer('sarampion')->nullable();
+            $table->integer('triple_virica')->nullable();
+            $table->integer('fiebre_amarilla')->nullable();
+            $table->integer('hepatitis_b')->nullable();
+            $table->integer('dt')->nullable();
             $table->timestamps();
         });
     }

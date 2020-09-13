@@ -16,7 +16,7 @@ class OrdenController extends Controller
 {
     public function indice_ordenes()
     {
-        $ordenes=Orden::all();
+        $ordenes=Orden::where('user_id',auth()->user()->id)->get();
         $pacientes=Paciente::all();
         return view('pages.examenes.ordenes.indice_ordenes',compact('ordenes','pacientes'));
     }
@@ -56,6 +56,7 @@ class OrdenController extends Controller
             return view('pages.examenes.ordenes.show_orden',compact('o','quimica'));
         }
     }
+
 
     public function agregar_resultados(Request $request)
     {
@@ -141,6 +142,47 @@ class OrdenController extends Controller
 
     public function imprimir_orden($id)
     {
-        dd($id);
+        $o=Orden::find($id);
+        //dd($o);
+        if($o->tipo=='copro'){
+            $copro=Copro::where('orden_id',$o->id)->first();
+            $view = view('pages.examenes.ordenes.imprimir_orden',compact('o','copro'));
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper("letter", "Portrait");
+            $pdf->loadHTML($view);
+            return $pdf->stream('o','copro');
+            //return view('pages.examenes.ordenes.imprimir_orden',compact('o','copro'));
+        }elseif($o->tipo=='especial'){
+            $espe=Especial::where('orden_id',$o->id)->first();
+            $view = view('pages.examenes.ordenes.imprimir_orden',compact('o','espe'));
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper("letter", "Portrait");
+            $pdf->loadHTML($view);
+            return $pdf->stream('o','espe');
+        }
+        elseif($o->tipo=='clinico'){
+            $clinico=Clinico::where('orden_id',$o->id)->first();
+            $view = view('pages.examenes.ordenes.imprimir_orden',compact('o','clinico'));
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper("letter", "Portrait");
+            $pdf->loadHTML($view);
+            return $pdf->stream('o','clinico');
+        }
+        elseif($o->tipo=='general'){
+            $gene=General::where('orden_id',$o->id)->first();
+            $view = view('pages.examenes.ordenes.imprimir_orden',compact('o','gene'));
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper("letter", "Portrait");
+            $pdf->loadHTML($view);
+            return $pdf->stream('o','gene');
+        }
+        elseif($o->tipo=='quimica'){
+            $quimica=Quimica::where('orden_id',$o->id)->first();
+            $view = view('pages.examenes.ordenes.imprimir_orden',compact('o','quimica'));
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper("letter", "Portrait");
+            $pdf->loadHTML($view);
+            return $pdf->stream('o','quimica');
+        }
     }
 }

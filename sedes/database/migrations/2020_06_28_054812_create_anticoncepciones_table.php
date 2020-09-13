@@ -15,6 +15,9 @@ class CreateAnticoncepcionesTable extends Migration
     {
         Schema::create('anticoncepciones', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->string('inicio')->nullable();
+            $table->string('metodo')->nullable();
             $table->timestamps();
         });
     }

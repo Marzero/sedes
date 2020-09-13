@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Paciente</label>
-                                        <select name="paciente_id" class="form-control" required>
+                                        <select name="paciente_id" class="form-control" id="sel2" style="width: 100%" required>
                                             <option value="">--Seleccione una opción--</option>
                                             @foreach($pacientes as $p)
                                                 <option value="{{ $p->id }}">
@@ -92,11 +92,11 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-10">
                                         <label>Detalle</label>
                                         <input type="text" name="detalle" class="form-control" required>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-2">
                                         <label>Dato</label>
                                         <input type="checkbox" class="form-control" value="si" name="dato">
                                     </div>
@@ -113,6 +113,46 @@
                     </div>
                 </div>
             </div>
+
+
+            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modal_impresion_cuaderno">
+                Impresion
+            </button>
+            <div class="modal fade" id="modal_impresion_cuaderno" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mediumModalLabel">Impresion de cuaderno</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('imprimir_enfermerias') }}" method="post" autocomplete="off">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ Auth()->user()->id }}" id="user_id">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <label>Inicio</label>
+                                        <input type="date" class="form-control" name="inicio">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Fin</label>
+                                            <input type="date" class="form-control" name="fin">
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">
+                                    Confirmar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             
             <h3></h3>
             {{-- <table id="example" class="table table-bordered table-striped table-condensed" style="width:100%"> --}}
@@ -176,6 +216,12 @@
 @endsection
 
 @section('scripts')
+<link href="{{ URL::to('select2/select2.css') }}" rel="stylesheet"/>
+    <script src="{{ URL::to('select2/select2.js') }}"></script>
+    <script>
+        //$(document).ready(function() { $("#e1").select2(); });
+        jQuery(function($){ $("#sel2").select2(); });
+    </script>
     <script src="{{ URL::to('admin/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>

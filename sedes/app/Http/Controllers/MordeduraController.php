@@ -79,4 +79,14 @@ class MordeduraController extends Controller
         return redirect()->back();
     }
 
+    public function impresion_mordedura($id)
+    {
+        $m=Mordedura::find($id);
+        $view = view('pages.mordeduras.impresion_mordedura',compact('m'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->setPaper("letter", "Portrait");
+        $pdf->loadHTML($view);
+        return $pdf->stream('m');
+    }
+
 }

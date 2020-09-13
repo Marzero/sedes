@@ -51,7 +51,8 @@ class UsuariosController extends Controller
         $u=User::find($id);
         if(Auth()->user()->HasPermissionTo('administrar usuarios')){
             $permisos=Permission::all();
-            return view('pages.admin.usuarios.ver_usuario',compact('u','permisos'));
+            $roles=Role::all();
+            return view('pages.admin.usuarios.ver_usuario',compact('u','permisos','roles'));
         }else{
             $error='No cuenta con los permisos necesarios para esta sección';
             return view('pages.error',compact('error'));
@@ -76,5 +77,16 @@ class UsuariosController extends Controller
         //dd($u,$p);
         flash('Datos actualizados correctamente','success');
         return redirect()->to('indice_usuarios');
+    }
+
+    public function asignar_rol(Request $request)
+    {
+        //dd($request);
+        $u=User::find($request->user_id);
+        $u->removeRole($request->rol_anterior);
+        $u->assignRole($request->role);
+        flash('Datos actualizados correctamente','success');
+        return redirect()->route('ver_usuario',$u->id);
+        
     }
 }

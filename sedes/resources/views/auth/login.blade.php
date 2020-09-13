@@ -26,14 +26,29 @@
     <link rel="stylesheet" href="{{ URL::to('admin/assets/css/style.css') }}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+        body{
+            width: 100%;
+            background-image: url("{{ URL::to('fondo_login.jpg') }}");
+/*
+            background-size: 50px;
+            background-size: 100%;
+            background-size: auto 50px;
+            background-size: auto 100%;*/
 
+            /* OKAY */
+            /*background-size: 50px 80px;*/
+            background-size: 98% 140%;
+
+        }
+    </style>
 
 
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark" background="{{ URL::to('fondo_login.jpg') }}">
 
-
+<br><br><br><br><br>
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">

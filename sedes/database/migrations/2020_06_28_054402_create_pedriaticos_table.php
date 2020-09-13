@@ -15,6 +15,11 @@ class CreatePedriaticosTable extends Migration
     {
         Schema::create('pedriaticos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->string('peso_rn')->nullable();
+            $table->string('tipo_parto')->nullable();
+            $table->string('obs_perinatales')->nullable();
+            $table->string('lactancia')->nullable();
             $table->timestamps();
         });
     }

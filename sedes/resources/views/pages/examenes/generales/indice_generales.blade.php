@@ -93,7 +93,7 @@
                                                                     <li style="list-style: none"><b>Fecha de nacimiento del paciente: </b> {{ $ord->paciente->perfil->fecha_nacimiento }}</li>
                                                                     <li style="list-style: none"><b>Fecha actual: </b> {{ date('Y-m-d') }}</li>
                                                                     <li style="list-style: none"><b>Fecha de registro de orden: </b> {{ $ord->created_at }}</li>
-                                                                    <li style="list-style: none"><b>Descripción: </b> {{ $ord->detalle }}</li>
+                                                                    <li style="list-style: none"><b>Descripción: </b> @php echo $ord->detalle @endphp</li>
                                                                     
                                                                 </ul>
                                                             </div>

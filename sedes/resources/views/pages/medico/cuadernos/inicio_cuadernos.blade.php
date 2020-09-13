@@ -27,45 +27,13 @@
             <h1>Atenciones diarias (cuaderno médico)</h1>
         </div>
         <div class="card-body">
+
             @include('pages.partes_repitentes.new_paciente_form')
+
 
             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#mediumModal">
                 Nueva atención
             </button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
@@ -96,7 +64,7 @@
                                     </div> --}}
                                     <div class="col-md-12">
                                     <label>Pacientes</label>
-                                        <select name="paciente_id" id="" class="form-control" required>
+                                        <select name="paciente_id" id="sel2" style="width: 100%" class="form-control" required>
                                             <option value="">--Seleccione una opcion--</option>
                                             @foreach($pacientes as $p)
                                                 <option value="{{ $p->id }}">
@@ -152,7 +120,43 @@
                 </div>
             </div>
 
-
+            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modal_impresion_cuaderno">
+                Impresion
+            </button>
+            <div class="modal fade" id="modal_impresion_cuaderno" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mediumModalLabel">Impresion de cuaderno</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('imprimir_cuaderno') }}" method="post" autocomplete="off">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ Auth()->user()->id }}" id="user_id">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <label>Inicio</label>
+                                        <input type="date" class="form-control" name="inicio">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Fin</label>
+                                            <input type="date" class="form-control" name="fin">
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">
+                                    Confirmar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -171,7 +175,7 @@
                     <tr>
                         <th>Nro.</th>
                         <th>Nombre</th>
-                        <th>Estado civil</th>
+                        <th>Fecha</th>
                         <th>Dato</th>
                         <th>Edad</th>
                         <th>Diagnostico</th>
@@ -180,13 +184,14 @@
                 </thead>
                 <tbody>
                     @foreach($cuadernos as $c)
+                    
                         <tr>
                             <td>{{ $c->id}}</td>
                             <td>{{ $c->paciente->perfil->apellido_paterno }} {{ $c->paciente->perfil->apellido_materno }} {{ $c->paciente->perfil->nombres }}</td>
-                            <td>{{ $c->paciente->perfil->estado_civil }}</td>
+                            <td>{{ $c->fecha }}</td>
                             <td>{{ $c->dato }}</td>
                             <td>{{ $c->edad }}</td>
-                            <td>{{ $c->diagnostico }}</td>
+                            <td>{!! $c->diagnostico !!}</td>
                             <td>
                                 <a href="{{ route('ver_cuaderno',$c->id) }}">Ver detalles</a>
                             </td>
@@ -226,6 +231,19 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script>
+        CKEDITOR.replace( 'diagnostico' );
+        //var sel2 = document.querySelector(".js-example-basic-single").select2();   
+        //sel2
+        
+    </script> 
+    <link href="{{ URL::to('select2/select2.css') }}" rel="stylesheet"/>
+    <script src="{{ URL::to('select2/select2.js') }}"></script>
+    <script>
+        //$(document).ready(function() { $("#e1").select2(); });
+        jQuery(function($){ $("#sel2").select2(); });
+    </script>
     <script src="{{ URL::to('admin/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>

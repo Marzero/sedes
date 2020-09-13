@@ -15,6 +15,10 @@ class CreateRiesgosTable extends Migration
     {
         Schema::create('riesgos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('paciente_id');
+            $table->string('factor');
+            $table->string('personal',1)->nullable();
+            $table->string('familiar',1)->nullable();
             $table->timestamps();
         });
     }

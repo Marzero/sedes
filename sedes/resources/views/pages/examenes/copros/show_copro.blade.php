@@ -43,7 +43,7 @@
                 <ul>
                     <li style="list-style: none"><b>Fecha: </b>{{ $copro->created_at }}</li>
                     <li style="list-style: none"><b>Medico Solicitante: </b>{{ $copro->paciente->perfil->apellido_paterno }} {{ $copro->paciente->perfil->apellido_materno }} {{ $copro->paciente->perfil->nombres }}</li>
-                    <li style="list-style: none"><b>Diagnostico: </b>{{ $c->diagnostico }}</li>
+                    <li style="list-style: none"><b>Diagnostico: </b>@php echo $c->diagnostico @endphp</li>
                 </ul>
                 <hr>
                 <h1>Receta</h1>

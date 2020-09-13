@@ -12,9 +12,16 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-13">
         <a href="javascript: history.go(-1)" class="btn btn-warning"> < Volver </a>
         {{-- <a href="{{ route('inicio_cuadernos') }}" class="btn btn-warning"> < Volver </a> --}}
+    </div>
+    <div class="col-md-3">
+        @if($o->estado!='pendiente')
+        <a href="{{ route('imprimir_orden',$o->id) }}" target="_blank" class="btn btn-primary">imprimir</a>
+        @else
+        <a href="{{ route('imprimir_orden',$o->id) }}" target="_blank" class="btn btn-primary disabled">imprimir</a>
+        @endif
     </div>
 </div>
 <div class="breadcrumbs">
@@ -53,7 +60,7 @@
                 @if($o->estado!='pendiente')
                     @isset($copro)
                         <h3>EXAMEN COPROPARASITOLOGICO</h3>
-                        <b>Se Observan: </b>{{ $copro->detalle }}
+                        <b>Se Observan: </b>@php echo $copro->detalle  @endphp
                     @else
                         
                     @endisset
@@ -76,7 +83,9 @@
                                 </table>
                             </div>
                         </div>
-                        <b>Serológico: </b> <br>{{ $espe->serologico }}
+                        {{-- <b>Serológico: </b> <br> --}}
+                        {!! $espe->serologico !!}
+                        
                     @else
                         
                     @endisset
@@ -700,7 +709,7 @@
                     @endisset
 
                 @else
-                AUN NO SE REGISTRAN LOS RESULTADOS RESULTADOS
+                    <p style="color: red">AUN NO SE REGISTRAN LOS RESULTADOS RESULTADOS</p>
                 @endif
             </div>
         </div>

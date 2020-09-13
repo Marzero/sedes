@@ -15,6 +15,8 @@
                     <a href="{{ route('home') }}"> <i class="menu-icon fa fa-dashboard"></i>Inicio </a>
                 </li>
                 <h3 class="menu-title">Menus</h3><!-- /.menu-title -->
+                
+                @can('administrar usuarios')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>Usuarios
@@ -25,6 +27,8 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                @endcan
+                @can('administrar permisos')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>Permisos
@@ -35,6 +39,8 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                @endcan
+                @can('controlar pacientes')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>Pacientes
@@ -45,6 +51,8 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                @endcan
+                @can('controlar pacientes')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>Cuaderno Medico
@@ -55,6 +63,8 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                @endcan
+                @can('controlar pacientes')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>mordeduras
@@ -65,6 +75,8 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                @endcan
+                @can('realizar certificados')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>Certificados medicos
@@ -75,6 +87,8 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                @endcan
+                @can('atencion enfermeria')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>Enfermeria
@@ -85,12 +99,19 @@
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_usuarios') }}">Ver</a></li> --}}
                     </ul>
                 </li>
+                @endcan
+                @can('registrar ordenes')
+                <li class="active">
+                    <a href="{{ route('indice_ordenes') }}"> <i class="menu-icon fa fa-dashboard"></i>Ordenes </a>
+                </li>
+                @endcan
+                @can('registrar resultados')
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="menu-icon fa fa-laptop"></i>Examenes
                     </a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_ordenes') }}">Ordenes</a></li>
+                        {{-- <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_ordenes') }}">Ordenes</a></li> --}}
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_copros') }}">Coproparasitológico</a></li>
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_generales') }}">General de orina</a></li>
                         <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('indice_clinicos') }}">Laboratorio clinico</a></li> 
@@ -99,9 +120,10 @@
                         
                     </ul>
                 </li>
+                @endcan
                 
 
-                <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
+                {{-- <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
                     <ul class="sub-menu children dropdown-menu">
@@ -109,7 +131,7 @@
                         <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
                         <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>

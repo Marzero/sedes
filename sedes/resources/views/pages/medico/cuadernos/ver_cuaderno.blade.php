@@ -44,8 +44,9 @@
                     <li style="list-style: none"><b>Fecha: </b>{{ $c->fecha }}</li>
                     <li style="list-style: none"><b>Dato: </b>{{ $c->dato }}</li>
                     <li style="list-style: none"><b>Estado civil: </b>{{ $c->paciente->perfil->estado_civil }}</li>
-                    <li style="list-style: none"><b>Diagnostico: </b>{{ $c->diagnostico }}</li>
+                    <li style="list-style: none"><b>Diagnostico: </b>@php echo $c->diagnostico @endphp</li>
                 </ul>
+                
                 <hr>
                 <h1>Receta</h1>
                 @isset($r)

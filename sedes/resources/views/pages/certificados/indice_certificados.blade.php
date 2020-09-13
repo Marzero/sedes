@@ -54,11 +54,11 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <label>Pacientes</label>
-                                        <select name="paciente_id" id="" class="form-control" required>
+                                        <select name="paciente_id" class="form-control" id="sel2" style="width: 100%" required>
                                             <option value="">--Seleccione una opcion--</option>
                                             @foreach($pacientes as $p)
                                                 <option value="{{ $p->id }}">
-                                                    {{ $p->perfil->apellido_paterno }} {{ $p->perfil->apellido_materno }} {{ $p->perfil->nombres }}
+                                                    {{ $p->perfil->ci }} | {{ $p->perfil->apellido_paterno }} {{ $p->perfil->apellido_materno }} {{ $p->perfil->nombres }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -137,7 +137,8 @@
                             <td>{{ $c->fecha }}</td>
                             <td>{{ $c->lugar }}</td>
                             <td>
-                                <a href="{{ route('show_certificado',$c->id) }}">Ver detalles</a>
+                                <a href="{{ route('show_certificado',$c->id) }}" class="btn btn-success">Ver detalles</a>
+                                <a href="{{ route('imprimir_certificado',$c->id) }}" class="btn btn-primary">Imprimir</a>
                             </td>
                         </tr>
                     @endforeach
@@ -173,6 +174,19 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'detalle' );
+        //var sel2 = document.querySelector(".js-example-basic-single").select2();   
+        //sel2
+        
+    </script> 
+    <link href="{{ URL::to('select2/select2.css') }}" rel="stylesheet"/>
+    <script src="{{ URL::to('select2/select2.js') }}"></script>
+    <script>
+        //$(document).ready(function() { $("#e1").select2(); });
+        jQuery(function($){ $("#sel2").select2(); });
+    </script>
     <script src="{{ URL::to('admin/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>

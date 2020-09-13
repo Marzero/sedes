@@ -22,6 +22,7 @@
             <h1>Indice de pacientes</h1>
         </div>
         <div class="card-body">
+            
             @include('pages.partes_repitentes.new_paciente_form')
             
             <p class="text-muted m-b-15"></p>

@@ -9,9 +9,12 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3">
         <a href="javascript: history.go(-1)" class="btn btn-warning"> < Volver </a>
         {{-- <a href="{{ route('indice_mordeduras') }}" class="btn btn-warning"> < Volver </a> --}}
+    </div>
+    <div class="col-md-3">
+        <a href="{{ route('impresion_mordedura',$m->id) }}" target="_blank" class="btn btn-primary">Impresion</a>
     </div>
 </div>
 <div class="breadcrumbs">
@@ -50,7 +53,7 @@
                 <div class="col-md-6">
                     <li style="list-style: none"><b>Fecha de mordedura: </b>{{ $m->fecha_mordedura }}</li>
                     <li style="list-style: none"><b>Donde fue mordido: </b>{{ $m->donde }}</li>
-                    <li style="list-style: none"><b>Localización de la mordedura: </b>{{ $m->localizacion_mordedura }}</li>
+                    <li style="list-style: none"><b>Localización de la mordedura: </b>{{ $m->localizacion }}</li>
                     <li style="list-style: none"><b>Herida: </b>{{ $m->herida }}</li>
                     <li style="list-style: none"><b>Tipo de herida: </b>{{ $m->tipo_herida }}</li>
                 </div>

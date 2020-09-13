@@ -18,7 +18,7 @@ class CreateCoprosTable extends Migration
             $table->UnsignedBigInteger('orden_id');
             $table->string('edad');
             $table->string('fecha');
-            $table->string('detalle');
+            $table->text('detalle');
             $table->UnsignedBigInteger('user_id');
             $table->string('tipo')->default('interno');
             $table->timestamps();

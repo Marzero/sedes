@@ -66,7 +66,8 @@
                             <td>
                                 <a href="{{ route('show_orden',$ord->id) }}">Ver</a>
                                 @php
-                                    $es=App\Especial::where('orden_id',$ord->id)->first();    
+                                    $es=App\Especial::where('orden_id',$ord->id)->first();   
+                                    //dd($es); 
                                 @endphp
                                 
                                 @if($es==null)
@@ -87,16 +88,21 @@
                                                     <input type="hidden" name="orden_id" value="{{ $ord->id }}">
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-6">
                                                                 <ul>
                                                                     <li style="list-style: none"><b>Orden nro: </b> {{ $ord->id }}</li>
                                                                     <li style="list-style: none"><b>Usuario que registro la orden: </b> {{ $ord->user->perfil->apellido_paterno }} {{ $ord->user->perfil->apellido_materno }} {{ $ord->user->perfil->nombres }}</li>
                                                                     <li style="list-style: none"><b>Paciente: </b> {{ $ord->paciente->perfil->apellido_paterno }} {{ $ord->paciente->perfil->apellido_materno }} {{ $ord->paciente->perfil->nombres }}</li>
+                                                                   
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <ul>
+                                                                    
                                                                     <li style="list-style: none"><b>Fecha de nacimiento del paciente: </b> {{ $ord->paciente->perfil->fecha_nacimiento }}</li>
                                                                     <li style="list-style: none"><b>Fecha actual: </b> {{ date('Y-m-d') }}</li>
                                                                     <li style="list-style: none"><b>Fecha de registro de orden: </b> {{ $ord->created_at }}</li>
-                                                                    <li style="list-style: none"><b>Descripción: </b> {{ $ord->detalle }}</li>
-                                                                    
+                                                                    <li style="list-style: none"><b>Descripción: </b> @php echo $ord->detalle @endphp </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -104,25 +110,23 @@
                                                             $fecha_nac=$ord->paciente->perfil->fecha_nacimiento;
                                                         @endphp     
                                                         <div class="row">
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-4">
                                                                 <label>Edad</label>
                                                                 <input type="number" name="edad" value="{{ calculaedad($fecha_nac) }}" class="form-control">
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
                                                                 <label>V.I.H.:</label>
                                                                 {{-- <input type="text" name="vih" class="form-control" required> --}}
-                                                                <select name="vih" id="" required class="form-control">
+                                                                <select name="vih" required class="form-control">
                                                                     <option value="">--Seleccione una opcion--</option>
                                                                     <option value="Negativo">Negativo</option>
                                                                     <option value="Positivo">Positivo</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-4">
                                                                 <label>R.P.R.:</label>
                                                                 {{-- <input type="text" name="rpr" class="form-control" required> --}}
-                                                                <select name="rpr" id="" required class="form-control">
+                                                                <select name="rpr" required class="form-control">
                                                                     <option value="">--Seleccione una opcion--</option>
                                                                     <option value="Reactivo">Reactivo</option>
                                                                     <option value="No reactivo">No reactivo</option>
@@ -131,8 +135,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <label>Edad</label>
-                                                                <textarea name="serologico" id="" cols="50" rows="3" class="form-control"></textarea>
+                                                                <label>Otros</label>
+                                                                <textarea name="serologico" cols="50" rows="3" class="editor"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -183,6 +187,11 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        //CKEDITOR.replace( '.serologico' );
+        CKEDITOR.replaceClass = 'editor';
+    </script> 
     <script src="{{ URL::to('admin/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>

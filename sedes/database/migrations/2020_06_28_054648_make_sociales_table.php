@@ -15,6 +15,10 @@ class MakeSocialesTable extends Migration
     {
         Schema::create('sociales', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('paciente_id');
+            $table->string('procedencia')->nullable();
+            $table->string('viajes_a')->nullable();
+            $table->string('otros')->nullable();
             $table->timestamps();
         });
     }

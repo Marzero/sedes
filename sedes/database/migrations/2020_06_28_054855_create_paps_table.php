@@ -15,6 +15,9 @@ class CreatePapsTable extends Migration
     {
         Schema::create('paps', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->string('fecha')->nullable();
+            $table->string('resultado')->nullable();
             $table->timestamps();
         });
     }

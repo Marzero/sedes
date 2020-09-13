@@ -32,4 +32,5 @@ class CoproController extends Controller
         flash('Registro correcto de examen coproparasitológico','success');
         return rediect()->back();
     }
+    
 }

@@ -34,4 +34,20 @@ class EnfermeriaController extends Controller
         $enfer=Enfermeria::find($id);
         return view('pages.enfermerias.show_enfermeria',compact('enfer'));
     }
+
+    public function imprimir_enfermerias(Request $request)
+    {
+        //dd($request);
+        //$cuadernos=Cuaderno::wherebetween('fecha',[$request->inicio,$request->fin])->get();
+        $inicio=$request->inicio;
+        $fin=$request->fin;
+        //$user=User::find($request->user_id);
+        $enfermerias=Enfermeria::where('fecha','>=',$request->inicio)->where('fecha','<=',$request->fin)->get();
+        //dd($enfermerias);
+        $view = view('pages.enfermerias.impresion_enfermerias',compact('enfermerias','inicio','fin'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->setPaper("letter", "landscape");
+        $pdf->loadHTML($view);
+        return $pdf->stream('enfermerias','inicio','fin');
+    }
 }

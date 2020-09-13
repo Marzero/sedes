@@ -15,6 +15,11 @@ class CreateEmbarazosTable extends Migration
     {
         Schema::create('embarazos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->integer('g')->nullable();
+            $table->integer('p')->nullable();
+            $table->integer('a')->nullable();
+            $table->integer('c')->nullable();
             $table->timestamps();
         });
     }

@@ -9,9 +9,12 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3">
         <a href="javascript: history.go(-1)" class="btn btn-warning"> < Volver </a>
         {{-- <a href="{{ route('indice_certificados') }}" class="btn btn-warning"> < Volver </a> --}}
+    </div>
+    <div class="col-md-3">
+        <a href="{{ route('imprimir_certificado',$c->id) }}" target="_blank" class="btn btn-primary">Imprimir</a>
     </div>
 </div>
 <div class="breadcrumbs">
@@ -46,13 +49,10 @@
                     <li style="list-style: none"><b>Médico: </b>{{ $c->user->perfil->apellido_paterno }} {{ $c->user->perfil->apellido_materno }} {{ $c->user->perfil->nombres }}</li>
                     <li style="list-style: none"><b>Matrícula: </b>{{ $c->matricula }}</li>
                 </div>
-
             </ul>
-            
             <div class="col-md-12">
                 <hr>
-                {{ $c->detalle }}
-
+                <p style="color: black">{!! $c->detalle !!}</p>
             </div>
         </div>
     </div>

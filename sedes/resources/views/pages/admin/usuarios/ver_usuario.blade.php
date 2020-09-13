@@ -66,6 +66,67 @@
                   @endforeach
               </tbody>
           </table>
+          <hr>
+          <h2>Asignacion de rol</h2>
+          <form action="{{ route('asignar_rol') }}" method="post">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ $u->id }}">
+              @if($u->hasRole('Administrador'))
+                <input type="hidden" name="rol_anterior" value="Administrador">
+              @elseif($u->hasRole('Doctor'))
+                <input type="hidden" name="rol_anterior" value="Doctor">
+              @elseif($u->hasRole('Laboratorista'))
+                <input type="hidden" name="rol_anterior" value="Laboratorista">
+              @elseif($u->hasRole('Enfermeria'))
+                <input type="hidden" name="rol_anterior" value="Enfermeria">
+              @else
+              @endif
+            
+            <div class="row">
+              <div class="col-md-12">
+                <label>Rol</label>
+                <select name="role" id="" class="form-control" required>
+                  <option value="">Seleccione una opción</option>
+                  @if($u->hasRole('Administrador'))
+                    <option value="Administrador" selected>Administrador</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Laboratorista">Laboratorista</option>
+                    <option value="Enfermeria">Enfermeria</option>
+                  @elseif($u->hasRole('Doctor'))
+                    <option value="Administrador">Administrador</option>
+                    <option value="Doctor" selected>Doctor</option>
+                    <option value="Laboratorista">Laboratorista</option>
+                    <option value="Enfermeria">Enfermeria</option>
+                  @elseif($u->hasRole('Laboratorista'))
+                    <option value="Administrador">Administrador</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Laboratorista" selected>Laboratorista</option>
+                    <option value="Enfermeria">Enfermeria</option>
+                  @elseif($u->hasRole('Enfermeria'))
+                    <option value="Administrador">Administrador</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Laboratorista">Laboratorista</option>
+                    <option value="Enfermeria" selected>Enfermeria</option>
+                  @else
+                  @endif
+                  {{-- @foreach ($roles as $rol)
+                      <option value="{{ $rol->id }}" {{ old('role_id',$u->hasRole('Administrador'))==TRUE ? 'selected' : '' }}>{{ $rol->name }}</option>
+                  @endforeach --}}
+                </select>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-success btn-block">enviar</button>
+              </div>
+            </div>
+          </form>
+            {{-- 
+            Doctor
+            Laboratorista
+            Enfermeria --}}
+
         </div>
       </div>
 

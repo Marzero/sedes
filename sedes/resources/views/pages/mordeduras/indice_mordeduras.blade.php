@@ -247,7 +247,9 @@
                             <td>{{ $m->nombre }}</td>
                             <td>{{ $m->edad }}</td>
                             <td>
-                                <a href="{{ route('show_mordedura',$m->id) }}">Ver detalles</a>
+                                <a href="{{ route('show_mordedura',$m->id) }}" class="btn btn-success">Ver detalles</a>
+                                <a href="{{ route('impresion_mordedura',$m->id) }}" target="_blank" class="btn btn-primary">Impresion</a>
+
                             </td>
                         </tr>
                     @endforeach
@@ -282,6 +284,12 @@
 @endsection
 
 @section('scripts')
+<link href="{{ URL::to('select2/select2.css') }}" rel="stylesheet"/>
+    <script src="{{ URL::to('select2/select2.js') }}"></script>
+    <script>
+        //$(document).ready(function() { $("#e1").select2(); });
+        jQuery(function($){ $("#sel2").select2(); });
+    </script>
     <script src="{{ URL::to('admin/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
@@ -291,6 +299,8 @@
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ URL::to('admin/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
 {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.20/datatables.min.js"></script>--}}
+
+
 <script>
     jQuery(function($){
         $('#ci_paciente').on('change',function(e){

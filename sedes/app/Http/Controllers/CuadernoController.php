@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cuaderno;
 use App\Paciente;
 use App\Perfil;
+use App\User;
 use App\Receta;
 class CuadernoController extends Controller
 {
@@ -39,5 +40,20 @@ class CuadernoController extends Controller
         $c=Cuaderno::find($id);
         $r=Receta::where('cuaderno_id',$c->id)->first();
         return view('pages.medico.cuadernos.ver_cuaderno',compact('c','r'));
+    }
+
+    public function imprimir_cuaderno(Request $request)
+    {
+        //dd($request);
+        //$cuadernos=Cuaderno::wherebetween('fecha',[$request->inicio,$request->fin])->get();
+        $inicio=$request->inicio;
+        $fin=$request->fin;
+        $user=User::find($request->user_id);
+        $cuadernos=Cuaderno::where('fecha','>=',$request->inicio)->where('fecha','<=',$request->fin)->get();
+        $view = view('pages.medico.cuadernos.impresion_cuaderno',compact('cuadernos','user','inicio','fin'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->setPaper("letter", "landscape");
+        $pdf->loadHTML($view);
+        return $pdf->stream('cuadernos','user','inicio','fin');
     }
 }

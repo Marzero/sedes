@@ -171,7 +171,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <label>Se observan:</label>
-                                                                <textarea name="detalle" id="detalle" cols="30" rows="6" class="form-control" required></textarea>
+                                                                <textarea name="detalle" id="detalle" cols="30" rows="6" class="editor" required></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -267,6 +267,11 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        //CKEDITOR.replace( '.serologico' );
+        CKEDITOR.replaceClass = 'editor';
+    </script> 
     <script src="{{ URL::to('admin/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::to('admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>

@@ -32,6 +32,17 @@ class CertificadoController extends Controller
         flash('Certificado guardado correctamente','success');
         return redirect()->route('show_certificado',$c->id);
     }
+
+    public function imprimir_certificado($id)
+    {
+        $c=Certificado::find($id);
+        //dd($c);
+        $view = view('pages.certificados.imprimir_certificado',compact('c'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->setPaper("letter", "Portrait");
+        $pdf->loadHTML($view);
+        return $pdf->stream('c');
+    }
     /*
       
       $table->UnsignedBigInteger('user_id');

@@ -49,4 +49,48 @@ class Paciente extends Model
     {
         return $this->HasMany(Enfermeria::class);
     }
+
+
+    public function pedriatico()
+    {
+        return $this->HasOne(Pedriatico::class);
+    }
+    public function vacuna()
+    {
+        return $this->HasOne(Vacuna::class);
+    }
+    public function embarazo()
+    {
+        return $this->HasOne(Embarazo::class);
+    }
+    public function pregnancies()
+    {
+        return $this->HasMany(Pregnancy::class);
+    }
+    public function paps()
+    {
+        return $this->HasMany(Pap::class);
+    }
+    public function anticoncepciones()
+    {
+        return $this->HasMany(Anticoncepcion::class);
+    }
+    public function patologicos()
+    {
+        return $this->HasMany(Patologico::class);
+    }
+    public function cronicas()
+    {
+        return $this->HasMany(Cronica::class);
+    }
+    public function riesgos()
+    {
+        return $this->HasMany(Riesgo::class);
+    }
+    public function sociales()
+    {
+        return $this->HasOne(Social::class);
+    }
+
+    
 }

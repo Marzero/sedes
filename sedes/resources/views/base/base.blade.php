@@ -27,8 +27,8 @@
     <link rel="stylesheet" href="{{ URL::to('admin/assets/css/style.css') }}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    @yield('links')
     @yield('styles')
-
 </head>
 
 <body>

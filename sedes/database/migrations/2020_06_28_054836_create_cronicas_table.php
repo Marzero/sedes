@@ -15,6 +15,11 @@ class CreateCronicasTable extends Migration
     {
         Schema::create('cronicas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->string('inicio')->nullable();
+            $table->string('medicamento')->nullable();
+            $table->string('dosificacion')->nullable();
+            $table->string('final')->nullable();
             $table->timestamps();
         });
     }

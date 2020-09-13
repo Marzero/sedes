@@ -15,6 +15,13 @@ class CreatePregnanciesTable extends Migration
     {
         Schema::create('pregnancies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->UnsignedBigInteger('paciente_id');
+            $table->integer('anio')->nullable();
+            $table->integer('duracion')->nullable();
+            $table->string('tipo')->nullable();
+            $table->integer('vivos')->nullable();
+            $table->integer('muertos')->nullable();
+            $table->string('aborto')->nullable();
             $table->timestamps();
         });
     }

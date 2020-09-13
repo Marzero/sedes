@@ -1,3 +1,14 @@
+@if ($errors->any())
+    <hr>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        <hr>
+    @endif
 <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#largeModal">
     Registrar nuevo paciente
 </button>

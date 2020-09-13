@@ -20,7 +20,7 @@ class CreateEspecialesTable extends Migration
             $table->string('fecha');
             $table->string('vih');
             $table->string('rpr');
-            $table->string('serologico');
+            $table->text('serologico');
             $table->UnsignedBigInteger('user_id');
             $table->string('tipo')->default('interno');
             $table->timestamps();
